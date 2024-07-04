@@ -11,7 +11,10 @@ LIB = ar rcs
 LINKS = -I /usr/local/include -L /usr/local/lib \
     -l mlx -l ft -framework OpenGL -framework Appkit
 
-SRC = main.c
+SRC = src/main.c \
+		src/error.c \
+		utils/ft_strmapcmp.c \
+		utils/ft_strlen.c
 
 OBJS = $(SRC:.c=.o)
 
