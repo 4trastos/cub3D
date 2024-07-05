@@ -8,20 +8,24 @@ RM = rm -f
 
 LIB = ar rcs
 
-LINKS = -I /usr/local/include -L /usr/local/lib \
-    -l mlx -l ft -framework OpenGL -framework Appkit
+# LINKS = -I /usr/local/include -L /usr/local/lib \
+#     -l mlx -l ft -framework OpenGL -framework Appkit
 
 SRC = src/main.c \
-		src/error.c \
-		utils/ft_strmapcmp.c \
-		utils/ft_strlen.c
+		src/error_free.c \
+		src/parse.c \
+		src/map_checker.c \
+		src/create_struct.c \
+		utils/utils.c \
+		utils/ft_split.c \
+		utils/get_next_line.c
 
 OBJS = $(SRC:.c=.o)
 
-all: $(NAME)
+all: $(NAME) ./minilibx-linux/Makefile
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
