@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/05 13:31:52 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/06 21:39:46 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CUBE3D_H
 
 # define SIZE 64
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 2
 
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+// # include "../minilibx-linux/mlx.h"
+// # include "../minilibx-linux/mlx_int.h"
 # include <math.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -29,21 +29,24 @@
 
 //*** STRUCTS ***//
 
-typedef struct s_error
-{
-	char	wall;
-	char	space;
-	char	exit;
-	char	player;
-	char	collects;
-	char	enemys;
-
-}	t_error;
-
 typedef struct s_design
 {
-
+	char	**map;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		floor[3];
+	int		ceiling[3];
+	size_t	px;
+	size_t	py;
 }	t_design;
+
+typedef struct s_game
+{
+	t_design	*cartridge;
+
+}	t_game;
 
 //*** INIT ***//
 
@@ -52,15 +55,21 @@ int			main(int argc, char **argv);
 //*** STRUCTS ***//
 
 t_design	*new_design(void);
-t_error		*new_error(void);
+t_game		*new_game(void);
+void		create_cartridge(char **data, t_design *cartridge, size_t x, size_t y);
 
 //*** GAME ***//
 
 //*** PARSE ***//
 
-char		**arg_check(int argc, char **argv, t_design *design, char **map);
-char		**map_check(int fd, t_design *design, char **map);
+char		**arg_check(int argc, char **argv, t_design *cartridge, char **map);
+char		**map_check(int fd, t_design *cartridge, char **map);
 int			char_validator(char *str);
+int			coordinates(char *str, t_design *cartridge, size_t x);
+int			ft_colours(char *str, t_design *cartridge, size_t x, size_t y);
+int			map_validator(char **data, t_design *cartridge, size_t y);
+int			walls_validator(char **copy);
+char		*read_file(int fd, char *str);
 
 //*** UTILS ***//
 

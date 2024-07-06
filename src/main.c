@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/05 13:53:20 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:22:31 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ char	**arg_check(int argc, char **argv, t_design *design, char **map)
 int	main(int argc, char **argv)
 {
 	char		**map;
-	t_design	*design;
+	t_design	*cartridge;
 
-	design = new_design();
+	cartridge = new_design();
 	map = NULL;
 	if (argc == 1)
 		error_msg("🚨 You have to upload a file to play! 🚨", NULL);
-	map = arg_check(argc, argv, design, map);
+	map = arg_check(argc, argv, cartridge, map);
 	ft_printmap(map);
 	// init_game(map, design);
-	free(design);
+	free(cartridge);
 	free_map(map);
 	return (0);
 }

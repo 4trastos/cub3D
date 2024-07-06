@@ -16,13 +16,15 @@ SRC = src/main.c \
 		src/parse.c \
 		src/map_checker.c \
 		src/create_struct.c \
+		src/cartridge.c \
 		utils/utils.c \
 		utils/ft_split.c \
-		utils/get_next_line.c
+		utils/get_next_line.c \
+		utils/ft_split.c \
 
 OBJS = $(SRC:.c=.o)
 
-all: $(NAME) ./minilibx-linux/Makefile
+all: $(NAME) #./minilibx-linux/Makefile
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)

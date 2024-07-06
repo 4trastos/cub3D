@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:49:49 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/05 12:43:53 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/06 13:07:52 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	if (!str)
 		return (0);
@@ -26,11 +26,14 @@ size_t	ft_strlen(char *str)
 
 void	ft_putstr(char *str)
 {
-	char	*aux;
+	int	i;
 
-	aux = str;
-	while (*aux)
-		write(1, aux++, 1);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }
 
 char	*ft_strdup(char *str)
@@ -38,44 +41,41 @@ char	*ft_strdup(char *str)
 	char	*new;
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (!str)
 		return (NULL);
 	new = malloc(ft_strlen(str) + 1);
 	if (!new)
 		return (NULL);
-	while (str[i] != '\0')
-	{
+	while (str[++i] != '\0')
 		new[i] = str[i];
-		i++;
-	}
 	new[i] = '\0';
 	return (new);
 }
 
 char	*ft_strjoin(char *board, char *buffer)
 {
-	size_t	i;
-	size_t	z;
-	char	*board_dir;
+	char	*new;
+	int		i;
+	int		j;
 
 	if (ft_strlen(buffer) == 0)
 		return (board);
-	board_dir = malloc((ft_strlen(board) + ft_strlen(buffer) + 1));
-	if (!board_dir)
+	new = malloc(ft_strlen(board) + ft_strlen(buffer) + 1);
+	if (!new)
 	{
 		free(board);
 		return (NULL);
 	}
 	i = -1;
+	j = 0;
 	while (board[++i] != '\0')
-		board_dir[i] = board[i];
-	z = 0;
-	while (buffer[z] != '\0')
-		board_dir[i++] = buffer[z++];
-	board_dir[i] = '\0';
+		new[i] = board[i];
+	while (buffer[j] != '\0')
+		new[i++] = buffer[j++];
+	new[i] = '\0';
 	free(board);
-	return (board_dir);
+	return (new);
 }
 
 char	*ft_strchr(char *str, int c)
