@@ -6,7 +6,7 @@
 /*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:17:52 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/06 21:39:51 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/07 11:08:55 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,9 @@ char	**map_check(int fd, t_design *cartridge, char **map)
 	char	**copy;
 	char	**data;
 	char	*str;
-	size_t	x;
 	size_t	y;
 
 	y = 0;
-	x = 0;
 	str = NULL;
 	copy = NULL;
 	str = malloc(1);
@@ -78,8 +76,9 @@ char	**map_check(int fd, t_design *cartridge, char **map)
 	str[0] = '\0';
 	str = read_file(fd, str);
 	data = ft_split(str, '\n');
-	create_cartridge(data, cartridge, x, y);
-	copy = ft_split(str, '\n');
+	create_cartridge(data, cartridge, y);
+	map = dupmatrix(cartridge->map);
+	copy = dupmatrix(cartridge->map);
 	if (walls_validator(copy) == 0)
 		error_msg("🚨 Map error - It is not completely enclosed by walls! 🚨", data);
 	free(str);

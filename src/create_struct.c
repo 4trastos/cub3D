@@ -6,7 +6,7 @@
 /*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:59:25 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/06 21:20:47 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/07 11:06:27 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ t_design	*new_design(void)
 	new->ea = NULL;
 	new->so = NULL;
 	new->we = NULL;
+	new->floor = (int *)malloc(3 * (sizeof(int)));
+	new->ceiling = (int *)malloc(3 * (sizeof(int)));
+	if (!new->ceiling || new->floor)
+		return (free(new), NULL);
 	while (i < 3)
 	{
 		new->ceiling[i] = 0;
 		new->floor[i] = 0;
 		i++;
 	}
+	new->floor_set = false;
+	new->ceiling_set = false;
 	return (new);
 }
 

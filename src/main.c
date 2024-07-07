@@ -6,7 +6,7 @@
 /*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/06 19:22:31 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/07 10:45:44 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 	map = arg_check(argc, argv, cartridge, map);
 	ft_printmap(map);
 	// init_game(map, design);
-	free(cartridge);
+	free_struct(cartridge);
 	free_map(map);
 	return (0);
 }

@@ -18,9 +18,11 @@ SRC = src/main.c \
 		src/create_struct.c \
 		src/cartridge.c \
 		utils/utils.c \
+		utils/utils_02.c \
+		utils/ft_itoa.c \
+		utils/ft_atoi.c \
 		utils/ft_split.c \
-		utils/get_next_line.c \
-		utils/ft_split.c \
+		utils/get_next_line.c
 
 OBJS = $(SRC:.c=.o)
 
