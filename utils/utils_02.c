@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:49:49 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/09 10:09:47 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:52:39 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	**dupmatrix(char **str)
 		i++;
 	}
 	new[i] = NULL;
-	// free_map(str);
 	return (new);
 }
 

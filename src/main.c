@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 09:54:15 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:52:59 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ static void	ft_printmap(char **map)
 
 char	**arg_check(int argc, char **argv, t_design *design, char **map)
 {
-	t_brain	*brain;
+	t_brain	brain;
 	int		fd;
 	int		file;
 
-	brain = NULL;
-	(void)brain;
+	new_brain(&brain);
 	if (argc != 2)
 		error_msg("🚨 Invalid number of arguments! 🚨", NULL);
 	fd = open(argv[1], O_RDONLY);
@@ -46,7 +45,7 @@ char	**arg_check(int argc, char **argv, t_design *design, char **map)
 		error_msg("🚨 The file is invalid - use a .cub file! 🚨", NULL);
 	else if (file == 2)
 		error_msg("🚨 The file is invalid - it may be hidden.! 🚨", NULL);
-	return (map_check(fd, design, map));
+	return (map_check(fd, design, map, &brain));
 }
 
 int	main(int argc, char **argv)
@@ -61,6 +60,7 @@ int	main(int argc, char **argv)
 	map = arg_check(argc, argv, &cartridge, map);
 	ft_printmap(map);
 	// init_game(map, design);
+	free(map);
 	free_struct(&cartridge);
 	return (0);
 }

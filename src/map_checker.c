@@ -6,13 +6,13 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:17:52 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 08:34:34 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:58:37 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
 
-int	map_validator(char **map)
+int	map_validator(char **map, t_brain *brain)
 {
 	if (char_validator(map) == 0)
 	{
@@ -24,7 +24,7 @@ int	map_validator(char **map)
 		error_msg("🚨 The loaded map contains an invalid player! 🚨", NULL);
 		return (0);
 	}
-	if (walking_the_wall(map) == 0)
+	if (walking_the_wall(map, brain) == 0)
 	{
 		error_msg("🚨 The map is not closed by walls! 🚨", NULL);
 		return (0);
@@ -76,7 +76,7 @@ char	*read_file(int fd, char *str)
 }
 
 
-char	**map_check(int fd, t_design *cartridge, char **map)
+char	**map_check(int fd, t_design *cartridge, char **map, t_brain *brain)
 {
 	char	**data;
 	char	*str;
@@ -94,7 +94,7 @@ char	**map_check(int fd, t_design *cartridge, char **map)
 	create_cartridge(data, cartridge, y);
 	free_map(data);
 	map = dupmatrix(cartridge->map);
-	if (map_validator(map) == 0)
+	if (map_validator(map, brain) == 0)
 		return (map);
 	return (map);
 }

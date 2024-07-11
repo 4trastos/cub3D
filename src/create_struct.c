@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:59:25 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/09 10:18:26 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:48:51 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,12 @@ t_game	*new_game(void)
 	if (!new)
 		return (NULL);
 	return (new);
+}
+
+void	new_brain(t_brain *new)
+{
+	new->init_x = 0;
+	new->init_y = 0;
+	new->cartridge = NULL;
+	new->game = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:22:59 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:54:43 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_brain
 {
 	t_design	*cartridge;
 	t_game		*game;
-	char		*init_x;
-	char		*init_y;
+	int			init_x;
+	int			init_y;
 
 }	t_brain;
 
@@ -67,6 +67,7 @@ int				main(int argc, char **argv);
 //*** STRUCTS ***//
 
 void			new_design(t_design *new);
+void			new_brain(t_brain *new);
 t_game			*new_game(void);
 void			create_cartridge(char **data, t_design *cartridge, size_t y);
 void			free_struct(t_design *cartridge);
@@ -77,14 +78,15 @@ void			free_struct(t_design *cartridge);
 
 char			**arg_check(int argc, char **argv, t_design *cartridge,
 					char **map);
-char			**map_check(int fd, t_design *cartridge, char **map);
+char			**map_check(int fd, t_design *cartridge, char **map,
+					t_brain *brain);
 int				char_validator(char **map);
 int				coordinates(char *str, t_design *cartridge);
 int				get_coordinates(char *str, t_design *cartridge, int flag);
 int				ft_colours(char *str, t_design *cartridge);
-int				map_validator(char **map);
+int				map_validator(char **map, t_brain *brain);
 int				player_validator(char **map);
-int				walking_the_wall(char **map);
+int				walking_the_wall(char **map, t_brain *brain);
 char			*read_file(int fd, char *str);
 char			**dupmatrix(char **str);
 void			walking_border(char **map, int y);

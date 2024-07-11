@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 12:47:33 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:43:30 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ void	walking_border(char **map, int y)
 	(void)y;
 }
 
-int	walking_the_wall(char **map)
+int	walking_the_wall(char **map, t_brain *brain)
 {
 	write(1, "### CAMINA POR EL MURO ###\n", 27);
 	(void)map;
+	(void)brain;
 	// while (map[y] != NULL)
 	// {
 	// 	x = 0;
