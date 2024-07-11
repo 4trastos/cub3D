@@ -17,6 +17,9 @@ SRC = src/main.c \
 		src/map_checker.c \
 		src/create_struct.c \
 		src/cartridge.c \
+		src/cartridge_2.c \
+		src/brain.c \
+		bits/binary_encoding.c \
 		utils/utils.c \
 		utils/utils_02.c \
 		utils/ft_itoa.c \

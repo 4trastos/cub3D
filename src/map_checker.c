@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:17:52 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/09 13:15:07 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 08:34:34 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	map_validator(char **map)
 		error_msg("🚨 The loaded map contains an invalid player! 🚨", NULL);
 		return (0);
 	}
-	if (walls_validator(map) == 0)
+	if (walking_the_wall(map) == 0)
 	{
 		error_msg("🚨 The map is not closed by walls! 🚨", NULL);
 		return (0);

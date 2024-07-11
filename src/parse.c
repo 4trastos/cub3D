@@ -6,31 +6,11 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:33:16 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/09 13:25:03 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/11 08:30:08 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
-
-int	walls_validator(char **map)
-{
-	int	y;
-	int	x;
-
-	write(1, "### ENTREA A PARSEAR MUROS ###\n", 32);
-	y = 0;
-	x = 0;
-	while (map[y] != NULL)
-	{
-		x = 0;
-		while (map[y][x] != '\0')
-		{
-			x++;
-		}
-		y++;
-	}
-	return (1);
-}
 
 int	player_validator(char **map)
 {
