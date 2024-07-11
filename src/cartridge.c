@@ -3,31 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cartridge.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
+/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:33:16 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/07 11:22:29 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/09 10:55:40 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
-
-int	map_validator(char **data, t_design *cartridge, size_t *y)
-{
-	(void)data;
-	(void)cartridge;
-	(void)y;
-	return (1);
-}
 
 int	ft_colours(char *str, t_design *cartridge)
 {
 	char	**number;
 	int		i;
 
-	if (*str != 'F' || *str != 'C' || !str || ft_strlen(str) < 1)
-		return (0);
-	number = NULL;
 	i = 0;
 	skip_whitespace(&str);
 	if (*str == 'F' && (*(str + 1) == ' ' || *(str + 1) == '\t')
@@ -38,32 +27,33 @@ int	ft_colours(char *str, t_design *cartridge)
 		number = ft_split(str, ',');
 		if (!number)
 			return (0);
-		while (i < 3 && number != NULL)
+		while (i < 3 && number[i] != NULL)
 		{
-			cartridge->floor[i] = ft_atoi(*number);
+			cartridge->floor[i] = ft_atoi(number[i]);
 			i++;
-			number++;
 		}
 		cartridge->floor_set = true;
+		free_map(number);
+		return (1);
 	}
-	else if (*str == 'C' && (*(str + 1) == ' ' || *(str + 1) == '\t')
-			&& cartridge->ceiling_set == false)
+	else if (*str == 'C' && (*(str + 1) == ' '
+			|| *(str + 1) == '\t') && cartridge->ceiling_set == false)
 	{
 		str++;
 		skip_whitespace(&str);
 		number = ft_split(str, ',');
 		if (!number)
 			return (0);
-		while (i < 3 && number != NULL)
+		while (i < 3 && number[i] != NULL)
 		{
-			cartridge->ceiling[i] = ft_atoi(*number);
+			cartridge->ceiling[i] = ft_atoi(number[i]);
 			i++;
-			number++;
 		}
 		cartridge->ceiling_set = true;
+		free_map(number);
+		return (1);
 	}
-	free_map(number);
-	return (1);
+	return (0);
 }
 
 int	coordinates(char *str, t_design *cartridge)
@@ -107,18 +97,15 @@ void	create_cartridge(char **data, t_design *cartridge, size_t y)
 		if (y <= 3)
 		{
 			if (coordinates(*data, cartridge) == 0)
-				error_msg("🚨 Map error - wrong coordinates! 🚨", data);
+				error_msg("🚨 Map error - wrong coordinates! 🚨", 0);
 		}
-		else if (y == 5 || y == 6)
+		else if (y == 4 || y == 5)
 		{
 			if (ft_colours(*data, cartridge) == 0)
-				error_msg("🚨 Map error - wrong colors! 🚨", data);
+				error_msg("🚨 Map error - wrong colors! 🚨", 0);
 		}
-		else if (y == 8)
-		{
-			if (map_validator(data, cartridge, &y) == 0)
-				error_msg("🚨 Map error - wrong map! 🚨", data);
-		}
+		else if (y == 6)
+			cartridge->map = dupmatrix(data);
 		y++;
 		if (*data == NULL)
 			return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
+/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/07 11:21:11 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/09 13:13:40 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_design
 	char		*so;
 	char		*we;
 	char		*ea;
-	int			*floor;
-	int			*ceiling;
+	int			floor[3];
+	int			ceiling[3];
 	bool		floor_set;
 	bool		ceiling_set;
 	size_t		px;
@@ -56,7 +56,7 @@ int				main(int argc, char **argv);
 
 //*** STRUCTS ***//
 
-t_design		*new_design(void);
+void			new_design(t_design *new);
 t_game			*new_game(void);
 void			create_cartridge(char **data, t_design *cartridge, size_t y);
 void			free_struct(t_design *cartridge);
@@ -65,13 +65,15 @@ void			free_struct(t_design *cartridge);
 
 //*** PARSE ***//
 
-char			**arg_check(int argc, char **argv, t_design *cartridge, char **map);
+char			**arg_check(int argc, char **argv, t_design *cartridge,
+					char **map);
 char			**map_check(int fd, t_design *cartridge, char **map);
-int				char_validator(char *str);
+int				char_validator(char **map);
 int				coordinates(char *str, t_design *cartridge);
 int				ft_colours(char *str, t_design *cartridge);
-int				map_validator(char **data, t_design *cartridge, size_t *y);
-int				walls_validator(char **copy);
+int				map_validator(char **map);
+int				player_validator(char **map);
+int				walls_validator(char **map);
 char			*read_file(int fd, char *str);
 char			**dupmatrix(char **str);
 
@@ -83,7 +85,7 @@ void			ft_putstr(char *str);
 char			*ft_strdup(char *str);
 char			*ft_strchr(char *str, int c);
 char			*ft_strjoin(char *str, char *dstr);
-void    		skip_whitespace(char **str);
+void			skip_whitespace(char **str);
 int				ft_countlines(char **str);
 
 //*** ERRORS & FREE ***//

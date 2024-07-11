@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
+/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:13 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/07 10:57:27 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/09 10:52:32 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	error_msg(char *str, char **map)
 
 void	free_map(char **map)
 {
-	char	**temp;
+	int	i;
 
-	temp = map;
-	while (*map)
+	i = 0;
+	while (map[i])
 	{
-		free(*map);
-		map++;
+		free(map[i]);
+		i++;
 	}
-	free(temp);
+	free(map);
 }
 
 void	free_coordinates(t_design *cartridge)
@@ -49,15 +49,8 @@ void	free_coordinates(t_design *cartridge)
 
 void	free_struct(t_design *cartridge)
 {
-	if (!cartridge)
-		return ;
 	if (cartridge->map != NULL)
 		free_map(cartridge->map);
 	cartridge->map = NULL;
 	free_coordinates(cartridge);
-	if (cartridge->ceiling != NULL)
-		free(cartridge->ceiling);
-	if (cartridge->floor != NULL)
-		free(cartridge->floor);
-	free(cartridge);
 }

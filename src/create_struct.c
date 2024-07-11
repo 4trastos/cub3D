@@ -3,41 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   create_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
+/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:59:25 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/07 11:06:27 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/09 10:18:26 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
 
-t_design	*new_design(void)
+void	new_design(t_design *new)
 {
-	t_design	*new;
-	int			i;
-
-	new = (t_design *)malloc(sizeof(t_design));
-	if (!new)
-		return (NULL);
-	i = 0;
-	new->no = NULL;
-	new->ea = NULL;
-	new->so = NULL;
-	new->we = NULL;
-	new->floor = (int *)malloc(3 * (sizeof(int)));
-	new->ceiling = (int *)malloc(3 * (sizeof(int)));
-	if (!new->ceiling || new->floor)
-		return (free(new), NULL);
-	while (i < 3)
-	{
-		new->ceiling[i] = 0;
-		new->floor[i] = 0;
-		i++;
-	}
-	new->floor_set = false;
 	new->ceiling_set = false;
-	return (new);
+	new->floor_set = false;
+	new->no = NULL;
+	new->so = NULL;
+	new->ea = NULL;
+	new->we = NULL;
 }
 
 t_game	*new_game(void)
