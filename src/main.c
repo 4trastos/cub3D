@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:52:59 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/12 09:32:15 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	map = arg_check(argc, argv, &cartridge, map);
 	ft_printmap(map);
 	// init_game(map, design);
-	free(map);
+	free_map(map);
 	free_struct(&cartridge);
 	return (0);
 }

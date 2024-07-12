@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:03:06 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:12:15 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/12 11:34:56 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,12 @@
 void			print_bits(unsigned char octet);
 unsigned char	reverse_bits(unsigned char octet);
 unsigned char	swap_bits(unsigned char octet);
+unsigned int	pack_coordinates(int y, int x);
+void			unpack_coord(unsigned int packed, int *y, int *x);
+
+//*** MORE UTILS ***//
+
+void			skip_space(char *str, int *x);
+
 
 #endif

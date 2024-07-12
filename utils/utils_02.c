@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:49:49 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:52:39 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:19:34 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ void	skip_whitespace(char **str)
 {
 	while (**str == ' ' || **str == '\t')
 		(*str)++;
+}
+
+void	skip_space(char *str, int *x)
+{
+	char	*aux;
+	int		i;
+
+	aux = str;
+	i = 0;
+	while ((aux[i] == ' ') && aux[i] != '\0')
+		i++;
+	*x += i;
 }
 
 char	**dupmatrix(char **str)
@@ -52,3 +64,12 @@ char	**dupmatrix(char **str)
 	return (new);
 }
 
+int	ft_mtx_len(char **mtx)
+{
+	int	len;
+
+	len = 0;
+	while (mtx[len] != NULL)
+		len++;
+	return (len);
+}

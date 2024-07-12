@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:54:43 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:31:33 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,32 @@
 
 typedef struct s_design
 {
-	char		**map;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	int			floor[3];
-	int			ceiling[3];
-	bool		floor_set;
-	bool		ceiling_set;
-	size_t		px;
-	size_t		py;
+	char			**map;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	int				floor[3];
+	int				ceiling[3];
+	bool			floor_set;
+	bool			ceiling_set;
+	size_t			px;
+	size_t			py;
 }	t_design;
 
 typedef struct s_game
 {
-	t_design	*cartridge;
+	t_design		*cartridge;
 
 }	t_game;
 
 typedef struct s_brain
 {
-	t_design	*cartridge;
-	t_game		*game;
-	int			init_x;
-	int			init_y;
+	t_design		*cartridge;
+	t_game			*game;
+	int				init_x;
+	int				init_y;
+	unsigned int	init_coord;
 
 }	t_brain;
 
@@ -89,7 +90,6 @@ int				player_validator(char **map);
 int				walking_the_wall(char **map, t_brain *brain);
 char			*read_file(int fd, char *str);
 char			**dupmatrix(char **str);
-void			walking_border(char **map, int y);
 void			upcolour_f(char **number, t_design *cartridge);
 void			upcolour_c(char **number, t_design *cartridge);
 
@@ -103,6 +103,7 @@ char			*ft_strchr(char *str, int c);
 char			*ft_strjoin(char *str, char *dstr);
 void			skip_whitespace(char **str);
 int				ft_countlines(char **str);
+int				ft_mtx_len(char **mtx);
 
 //*** ERRORS & FREE ***//
 
@@ -135,5 +136,11 @@ char			*ft_itoa(int n);
 
 int				ft_count(char *str, int i);
 int				ft_atoi(char *str);
+
+//*** WALKING THE WALL ***//
+
+unsigned int	save_init(int y, int x, t_brain *brain);
+void			walking_border(unsigned int *current, char **map,
+					int *y, int *x);			
 
 #endif
