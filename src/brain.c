@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/12 13:52:41 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/12 14:06:36 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ unsigned int	save_init(int y, int x, t_brain *brain)
 void	walking_border(unsigned int *current, char **map, int *y, int *x)
 {
 	// unpack_coord(*current, x, y);
-	if (*x <= 30 && map[*y][*x + 1] == '1')
+	if (*x <= (int)ft_strlen(map[*y]) && map[*y][*x + 1] == '1')
 	{
 		map[*y][*x] = 'F';
-		if (*x != 30)
+		if (*x != (int)ft_strlen(map[*y]))
 			(*x)++;
 	}
 	else if (*y < ft_mtx_len(map) && map[*y + 1][*x] == '1')
