@@ -19,9 +19,11 @@ SRC = src/main.c \
 		src/cartridge.c \
 		src/cartridge_2.c \
 		src/brain.c \
+		src/brain_2.c \
 		bits/binary_encoding.c \
 		utils/utils.c \
 		utils/utils_02.c \
+		utils/utils_03.c \
 		utils/ft_itoa.c \
 		utils/ft_atoi.c \
 		utils/ft_split.c \

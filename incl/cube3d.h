@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/12 13:31:33 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:39:39 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_brain
 	t_game			*game;
 	int				init_x;
 	int				init_y;
+	bool			drowned;
 	unsigned int	init_coord;
 
 }	t_brain;
@@ -87,7 +88,6 @@ int				get_coordinates(char *str, t_design *cartridge, int flag);
 int				ft_colours(char *str, t_design *cartridge);
 int				map_validator(char **map, t_brain *brain);
 int				player_validator(char **map);
-int				walking_the_wall(char **map, t_brain *brain);
 char			*read_file(int fd, char *str);
 char			**dupmatrix(char **str);
 void			upcolour_f(char **number, t_design *cartridge);
@@ -97,6 +97,7 @@ void			upcolour_c(char **number, t_design *cartridge);
 
 int				ft_strmapcmp(char *str, char *dst, int len);
 size_t			ft_strlen(char *str);
+int 			ft_strlencust(char *str);
 void			ft_putstr(char *str);
 char			*ft_strdup(char *str);
 char			*ft_strchr(char *str, int c);
@@ -140,7 +141,8 @@ int				ft_atoi(char *str);
 //*** WALKING THE WALL ***//
 
 unsigned int	save_init(int y, int x, t_brain *brain);
-void			walking_border(unsigned int *current, char **map,
-					int *y, int *x);			
+void			walking_border(t_brain *brain, char **map, int *y, int *x);
+void			updgrade_current(unsigned int *current, char **map, int *y, int *x);
+int				walking_the_wall(char **map, t_brain *brain);			
 
 #endif
