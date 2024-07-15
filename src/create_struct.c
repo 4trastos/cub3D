@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
+/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:59:25 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/14 13:39:59 by usuario          ###   ########.fr       */
+/*   Updated: 2024/07/15 15:18:08 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,8 @@ void	new_brain(t_brain *new)
 	new->cartridge = NULL;
 	new->game = NULL;
 	new->drowned = false;
+	new->down = false;
+	new->left = false;
+	new->right = false;
+	new->up = false;
 }

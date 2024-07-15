@@ -6,13 +6,13 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/12 09:32:15 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:38:14 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
 
-static void	ft_printmap(char **map)
+void	ft_printmap(char **map)
 {
 	int	i;
 
