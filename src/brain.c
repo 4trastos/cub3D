@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/15 18:56:29 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:59:30 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,55 +16,59 @@ void	wanted_road(t_brain *brain, char **map, int *y, int *x)
 {
 	int	len;
 	int	alt;
+	int	aux;
 
 	len = ft_strlencust(map[*y]) - 1;
-	alt = ft_mtx_len(map) -1;
-	if (*y == 0 && *x > 0 && *x < len)
+	alt = ft_mtx_len(map) - 1;
+	aux = 0;
+	reset_move(brain);
+	if (*y == 0)
 	{
-		if (*x < len && map[*y][*x + 1] == '1')
-			brain->right = true;
-		else if (*x == len && map[*y + 1][*x] == '1')
+		printf("XXXXXXXXXXXXXXX   PRIMERA LINEA   XXXXXXXXXXXXXXXXXXXXX\n\n");
+		if (*x == len && map[*y + 1][*x] == '1')
 			brain->down = true;
-	}
-	if (*y == 0 && *x == len)
-	{
-		if (map[*y + 1][*x] == '1')
+		else if (map[*y][*x + 1] == '1' && map[*y + 1][*x + 1] != ' ')
+			brain->right = true;
+		else if (map[*y + 1][*x] == '1')
 			brain->down = true;
 	}
 	else if (*y > 0 && *y < alt)
 	{
-		if (*y - 1 == brain->init_y && *x == brain->init_x)
+		printf("XXXXXXXXXXXXXXX  LINEAS INTERMEDIAS   XXXXXXXXXXXXXXXXXXXXX\n\n");
+		aux = ft_strlencust(map[*y + 1]) - 1;
+		if (*x == len && (len == aux) && map[*y + 1][*x] == '1')
+			brain->down = true;
+		if (*x == len && (len == aux) && map[*y + 1][*x] == '1')
+			brain->down = true;
+		else if (*x > len && (len < aux) && map[*y][*x - 1] == '1')
+			brain->left = true;
+		else if (map[*y - 1][*x] == 'F' &&
+			(*y - 1 == brain->init_y && *x == brain->init_x))
 			brain->up = true;
-		else if (map[*y - 1][*x] == ' ' && *x < len)
+		else if (map[*y][*x + 1] == '1' && map[*y + 1][*x + 1] == ' ')
+			brain->down = true;
+		else if (map[*y][*x + 1] == '1' && map[*y - 1][*x + 1] == ' ')
+			brain->right = true;
+		else if (map[*y][*x + 1] == '1' && map[*y - 1][*x + 1] == 'F')
 		{
-			if (map[*y][*x + 1] == '1')
+			if (*y - 1 == brain->init_y && *x + 1 == brain->init_x)
 				brain->right = true;
 		}
+		else if (map[*y + 1][*x] == '1')
+			brain->down = true;
 		else if (map[*y - 1][*x] == '1')
 			brain->up = true;
-		else if (map[*y + 1][*x] == '1' && *y < alt)
-			brain->down = true;
-		else if (*x <= len && map[*y][*x - 1] == '1')
+		else if (*x > 0 && map[*y][*x - 1] == '1')
 			brain->left = true;
 	}
-	else if (*y == alt && *x != 0)
+	else if (*y == alt)
 	{
+		printf("XXXXXXXXXXXXXXX   ULTIMA LINEA   XXXXXXXXXXXXXXXXXXXXX\n\n");
 		if (*x == len && map[*y][*x - 1] == '1')
 			brain->left = true;
-		else if (*x < len && map[*y][*x - 1] == '1' && *x != 0)
+		else if (*x > 0 && map[*y][*x - 1] == '1')
 			brain->left = true;
-		else if (*x < len && map[*y][*x - 1] == ' ' && *x != 0)
-		{
-			if (map[*y - 1][*x] == '1')
-				brain->up = true;
-			else if (map[*y - 1][*x] == 'F' && (*y - 1 == brain->init_y
-				&& *x == brain->init_x))
-				brain->up = true;
-		}
-	}
-	else if (*y == alt && *x == 0)
-	{
-		if (map[*y - 1][*x] == '1')
+		else if (*x < len && map[*y - 1][*x] == '1')
 			brain->up = true;
 	}
 }
@@ -94,43 +98,44 @@ void	walking_border(t_brain *brain, char **map, int *y, int *x)
 	c = 'F';
 	if (brain->right)
 	{
-		printf("ACTUAL: --->>>>>>     %c\n", map[*y][*x]);
-		printf("%s\n", map[*y]);
+		printf("POSICIÓN X:   %d ---->>>>  %c  --->>>  %s\n", *x, map[*y][*x], map[*y]);
 		map[*y][*x] = c;
-		printf("CAMBIADO:  ---->>>>    %c\n", map[*y][*x]);
+		printf("CAMBIA LETRA:   ---------------->>>  %s\n", map[*y]);
 		(*x)++;
-		printf("%s\n", map[*y]);
+		printf("\n");
 	}
 	else if (brain->down)
 	{
-		printf("ACTUAL: --->>>>>>     %c\n", map[*y][*x]);
-		printf("%s\n", map[*y]);
+		printf("POSICIÓN X:   %d ---->>>>  %c  --->>>  %s\n", *x, map[*y][*x], map[*y]);
 		map[*y][*x] = c;
+		printf("CAMBIA LETRA:   ---------------->>>  %s\n", map[*y]);
 		(*y)++;
-		printf("CAMBIADO:  ---->>>>    %c\n", map[*y][*x]);
-		printf("%s\n", map[*y]);
+		printf("\n");
+		printf("        + + + + + + + BAJA LINEA + + + + + + +\n\n");
+
 	}
 	else if (brain->left)
 	{
-		printf("ACTUAL: --->>>>>>     %c\n", map[*y][*x]);
-		printf("%s\n", map[*y]);
+		printf("POSICIÓN X:   %d ---->>>>  %c  --->>>  %s\n", *x, map[*y][*x], map[*y]);
 		map[*y][*x] = c;
-		printf("CAMBIADO:  ---->>>>    %c\n", map[*y][*x]);
+		printf("CAMBIA LETRA:   ---------------->>>  %s\n", map[*y]);
 		(*x)--;
-		printf("%s\n", map[*y]);
+		printf("\n");
 	}
 	else if (brain->up)
 	{
-		printf("ACTUAL: --->>>>>>     %c\n", map[*y][*x]);
-		printf("%s\n", map[*y]);
+		printf("POSICIÓN X:   %d ---->>>>  %c  --->>>  %s\n", *x, map[*y][*x], map[*y]);
 		map[*y][*x] = c;
-		printf("CAMBIADO:  ---->>>>    %c\n", map[*y][*x]);
+		printf("CAMBIA LETRA:   ---------------->>>  %s\n", map[*y]);
 		(*y)--;
-		printf("%s\n", map[*y]);
+		printf("\n");
+		printf("        + + + + + + + SUBE LINEA + + + + + + +\n\n");
 	}
 	else
+	{
 		brain->drowned = true;
-	reset_move(brain);
+		printf("################ NO SE PUEDE MOVER ##############\n");
+	}
 }
 
 int	walking_the_wall(char **map, t_brain *brain)
@@ -150,3 +155,47 @@ int	walking_the_wall(char **map, t_brain *brain)
 		return (1);
 	return (0);
 }
+
+/* void	wanted_road(t_brain *brain, char **map, int *y, int *x)
+{
+	int	len;
+	int	alt;
+
+	len = ft_strlencust(map[*y]) - 1;
+	alt = ft_mtx_len(map) -1;
+	reset_move(brain);
+	if (*y == 0)
+	{
+		if (*x == 0)
+		{
+			if (x == len && map[*y++][*x] == '1')
+				brain->down = true;
+			else if (map[*y][*x++] == '1' && map[*y++][*x++] == ' '
+				&& map[*y++][*x] == '1')
+				brain->down = true;
+			else if (map[*y][*x++] == '1' && map[*y++][*x++] != ' ')
+				brain->right = true;
+		}
+		else if (*x > 0 && *x < len)
+		{
+			if (map[*y][*x++] == '1' && map[*y++][*x++] != ' ')
+				brain->right = true;
+			else if (map[*y][*x++] == '1' && map[*y++][*x++] == ' '
+				&& map[*y++][*x] == '1')
+				brain->down = true;
+		}
+		else if (*x == len && map[*y++][*x] == '1')
+			brain->down = true;
+	}
+	else if (*y > 0 && *y < alt)
+	{
+		if (map[*y--][*x] == ' ' && map[*y][*x++] == '1')
+			brain->right = true;
+		else if (map[*y--][*x] == '1' && map[*y--][])
+			brain->up = true;
+	}
+	else if (*y == alt)
+	{
+		
+	}
+} */
