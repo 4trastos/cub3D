@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/17 14:59:30 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:38:36 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,33 @@ void	wanted_road(t_brain *brain, char **map, int *y, int *x)
 	if (*y == 0)
 	{
 		printf("XXXXXXXXXXXXXXX   PRIMERA LINEA   XXXXXXXXXXXXXXXXXXXXX\n\n");
+		aux = ft_strlencust(map[*y + 1]) - 1;
 		if (*x == len && map[*y + 1][*x] == '1')
 			brain->down = true;
-		else if (map[*y][*x + 1] == '1' && map[*y + 1][*x + 1] != ' ')
-			brain->right = true;
-		else if (map[*y + 1][*x] == '1')
-			brain->down = true;
+		else if (*x <= aux)
+		{
+			if (*x < aux && map[*y][*x + 1] == '1')
+				brain->right = true;
+			else if ((*x == aux) && map[*y + 1][*x] == '1')
+				brain->down = true;
+		}
 	}
 	else if (*y > 0 && *y < alt)
 	{
 		printf("XXXXXXXXXXXXXXX  LINEAS INTERMEDIAS   XXXXXXXXXXXXXXXXXXXXX\n\n");
 		aux = ft_strlencust(map[*y + 1]) - 1;
-		if (*x == len && (len == aux) && map[*y + 1][*x] == '1')
-			brain->down = true;
-		if (*x == len && (len == aux) && map[*y + 1][*x] == '1')
-			brain->down = true;
-		else if (*x > len && (len < aux) && map[*y][*x - 1] == '1')
-			brain->left = true;
+		if (*x == len)
+		{
+			if (len > aux && map[*y][*x - 1] == '1')
+				brain->left = true;
+			else if (map[*y + 1][*x] == '1')
+				brain->down = true;
+		}
 		else if (map[*y - 1][*x] == 'F' &&
 			(*y - 1 == brain->init_y && *x == brain->init_x))
 			brain->up = true;
-		else if (map[*y][*x + 1] == '1' && map[*y + 1][*x + 1] == ' ')
-			brain->down = true;
+		// else if (map[*y][*x + 1] == '1' && map[*y + 1][*x + 1] == ' ')
+		// 	brain->down = true;
 		else if (map[*y][*x + 1] == '1' && map[*y - 1][*x + 1] == ' ')
 			brain->right = true;
 		else if (map[*y][*x + 1] == '1' && map[*y - 1][*x + 1] == 'F')
@@ -54,12 +59,30 @@ void	wanted_road(t_brain *brain, char **map, int *y, int *x)
 			if (*y - 1 == brain->init_y && *x + 1 == brain->init_x)
 				brain->right = true;
 		}
-		else if (map[*y + 1][*x] == '1')
-			brain->down = true;
-		else if (map[*y - 1][*x] == '1')
-			brain->up = true;
-		else if (*x > 0 && map[*y][*x - 1] == '1')
-			brain->left = true;
+		else if (len >= aux)
+		{
+			// if (*x < aux && map[*y + 1][*x] == '1')
+			// 	brain->down = true;
+			if (*x < aux && *x > 0)
+			{
+				if (map[*y + 1][*x] == '1')
+					brain->down = true;
+				else if (map[*y][*x - 1] == '1')
+					brain->left = true;
+			}
+			else if ((*x == aux) && map[*y + 1][*x] == '1')
+				brain->down = true;
+			else if (map[*y - 1][*x] == '1')
+				brain->up = true;
+			else if (*x > 0 && map[*y][*x - 1] == '1')
+				brain->left = true;
+		}
+		// else if (map[*y + 1][*x] == '1')
+		// 	brain->down = true;
+		// else if (map[*y - 1][*x] == '1')
+		// 	brain->up = true;
+		// else if (*x > 0 && map[*y][*x - 1] == '1')
+		// 	brain->left = true;
 	}
 	else if (*y == alt)
 	{
