@@ -2,14 +2,17 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address
 
 RM = rm -f
 
 LIB = ar rcs
 
-# LINKS = -I /usr/local/include -L /usr/local/lib \
-#     -l mlx -l ft -framework OpenGL -framework Appkit
+EXTRA = -I ./incl -I $(LIBMLX)/include
+
+LIBMLX = ./MLX42-master
+
+MLX42 = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRC = src/main.c \
 		src/error_free.c \
@@ -18,6 +21,7 @@ SRC = src/main.c \
 		src/create_struct.c \
 		src/cartridge.c \
 		src/cartridge_2.c \
+		src/raycast.c \
 		src/brain.c \
 		bits/binary_encoding.c \
 		utils/utils.c \
@@ -29,10 +33,13 @@ SRC = src/main.c \
 
 OBJS = $(SRC:.c=.o)
 
-all: $(NAME) #./minilibx-linux/Makefile
+all: libmlx $(NAME) 
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(MLX42) $(EXTRA) -o $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
