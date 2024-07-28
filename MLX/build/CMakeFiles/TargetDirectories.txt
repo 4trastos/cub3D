@@ -1,0 +1,7 @@
+/home/nicgonza/Documents/cub3d/MLX/build/CMakeFiles/mlx42.dir
+/home/nicgonza/Documents/cub3d/MLX/build/CMakeFiles/edit_cache.dir
+/home/nicgonza/Documents/cub3d/MLX/build/CMakeFiles/rebuild_cache.dir
+/home/nicgonza/Documents/cub3d/MLX/build/CMakeFiles/list_install_components.dir
+/home/nicgonza/Documents/cub3d/MLX/build/CMakeFiles/install.dir
+/home/nicgonza/Documents/cub3d/MLX/build/CMakeFiles/install/local.dir
+/home/nicgonza/Documents/cub3d/MLX/build/CMakeFiles/install/strip.dir
