@@ -15,9 +15,12 @@
 
 # define SIZE 64
 # define BUFFER_SIZE 2
+# define WIDTH 1920
+# define HEIGHT 1080
+# define PI 3.1416
+# define RADIAN 0.0174533
 
-// # include "../minilibx-linux/mlx.h"
-// # include "../minilibx-linux/mlx_int.h"
+# include "../MLX/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -41,6 +44,8 @@ typedef struct s_design
 	int			ceiling[3];
 	bool		floor_set;
 	bool		ceiling_set;
+	int			height;
+	int			width;
 	size_t		px;
 	size_t		py;
 }	t_design;
@@ -60,6 +65,25 @@ typedef struct s_brain
 
 }	t_brain;
 
+
+typedef struct s_imgd
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_imgd;
+
+typedef	struct s_p
+{
+	int			x;
+	int			y;
+	char		**map;
+	double		angle;
+	mlx_image_t *player;
+}	t_p;
+
 //*** INIT ***//
 
 int				main(int argc, char **argv);
@@ -73,6 +97,8 @@ void			create_cartridge(char **data, t_design *cartridge, size_t y);
 void			free_struct(t_design *cartridge);
 
 //*** GAME ***//
+
+
 
 //*** PARSE ***//
 
@@ -103,6 +129,9 @@ char			*ft_strchr(char *str, int c);
 char			*ft_strjoin(char *str, char *dstr);
 void			skip_whitespace(char **str);
 int				ft_countlines(char **str);
+int				get_width(char **map);
+void			get_player(t_p *p, char **map);
+void			*ft_memset(void *str, int c, size_t n);
 
 //*** ERRORS & FREE ***//
 
