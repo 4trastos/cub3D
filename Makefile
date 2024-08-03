@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux #-g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux -g3 -fsanitize=address
 
 RM = rm -f
 
