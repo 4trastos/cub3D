@@ -6,39 +6,27 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/18 18:10:01 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:20:03 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
 
-void	last_position(t_brain *brain, char **map, int *y, int *x)
-{
-	int	aux;
-	int	len;
-
-	len = ft_strlencust(map[*y]) - 1;
-	aux = ft_strlencust(map[*y + 1]) - 1;
-	if (len > aux && map[*y][*x - 1] == '1')
-		brain->left = true;
-	else if (map[*y + 1][*x] == '1')
-		brain->down = true;
-}
-
 void	first_line(t_brain *brain, char **map, int *y, int *x)
 {
-	int	aux;
+	int	next;
 	int	len;
 
+	printf("LINEA:  %d    COLUMNA:   %d\n", *y, *x);
 	len = ft_strlencust(map[*y]) - 1;
-	aux = ft_strlencust(map[*y + 1]) - 1;
+	next = ft_strlencust(map[*y + 1]) - 1;
 	if (*x == len && map[*y + 1][*x] == '1')
 		brain->down = true;
-	else if (*x <= aux)
+	else if (*x <= next)
 	{
-		if (*x < aux && map[*y][*x + 1] == '1')
+		if (*x < next && map[*y][*x + 1] == '1')
 			brain->right = true;
-		else if ((*x == aux) && map[*y + 1][*x] == '1')
+		else if ((*x == next) && map[*y + 1][*x] == '1')
 			brain->down = true;
 	}
 }
@@ -47,6 +35,7 @@ void	last_line(t_brain *brain, char **map, int *y, int *x)
 {
 	int	len;
 
+	printf("LINEA:  %d    COLUMNA:   %d\n", *y, *x);
 	len = ft_strlencust(map[*y]) - 1;
 	if (*x == len && map[*y][*x - 1] == '1')
 		brain->left = true;
@@ -56,68 +45,99 @@ void	last_line(t_brain *brain, char **map, int *y, int *x)
 		brain->up = true;
 }
 
-void	intermediate_lines(t_brain *brain, char **map, int *y, int *x)
+void	last_position(t_brain *brain, char **map, int *y, int *x)
 {
-	int	aux;
+	int	next;
 	int	len;
 
+	printf("LINEA:  %d    COLUMNA:   %d\n", *y, *x);
 	len = ft_strlencust(map[*y]) - 1;
-	aux = ft_strlencust(map[*y + 1]) - 1;
-	printf("LINEA:  %d    FILA:   %d\n", *y, *x);
-	if (*x == len)
-		last_position(brain, map, y, x);
+	next = ft_strlencust(map[*y + 1]) - 1;
+	if (len > next && map[*y][*x - 1] == '1')
+		brain->left = true;
+	else if (len == next && map[*y + 1][*x] == '1')
+		brain->down = true;
+	else if (len < next && map[*y + 1][*x] == '1')
+		brain->down = true;
+}
+
+void	first_position(t_brain *brain, char **map, int *y, int *x)
+{
+	if (map[*y - 1][*x] == '1')
+		brain->up = true;
 	else if (map[*y - 1][*x] == 'F' &&
 		(*y - 1 == brain->init_y && *x == brain->init_x))
 		brain->up = true;
-	else if (map[*y][*x + 1] == '1' && map[*y - 1][*x + 1] == ' ' && aux < len)
+	else if (map[*y - 1][*x] == ' ' && map[*y][*x + 1] == '1')
 		brain->right = true;
-	else if (map[*y - 1][*x] == ' ' && map[*y][*x + 1] == '1' &&
-		map[*y - 1][*x + 1] == '1')
-		brain->right = true;
-	else if (map[*y][*x + 1] == '1' && map[*y - 1][*x + 1] == 'F')
+}
+
+void	intermediate_lines(t_brain *brain, char **map, int *y, int *x)
+{
+	int	next;
+	int	len;
+	int	prev;
+	int	init_prev;
+
+	printf("LINEA:  %d    COLUMNA:   %d\n", *y, *x);
+	init_prev = get_prev(map[*y - 1]);
+	printf("Inicio de la previa: --->>> %d   ", init_prev);
+	len = ft_strlencust(map[*y]) - 1;
+	next = ft_strlencust(map[*y + 1]) - 1;
+	prev = ft_strlencust(map[*y - 1]) - 1;
+	if (*x == 0)
+		first_position(brain, map, y, x);
+	else if (*x > 0 && *x < len)
 	{
-		if (*y - 1 == brain->init_y && *x + 1 == brain->init_x)
-			brain->right = true;
-	}
-	else if (len >= aux)
-	{
-		if (*x < aux && *x > 0)
+		if (len == next)
 		{
-			if (map[*y + 1][*x] == '1')
+			if (map[*y][*x + 1] == '1' && *x < init_prev)
+				brain->right = true;
+			else if (map[*y + 1][*x] == '1')
 				brain->down = true;
-			else if (map[*y][*x - 1] == ' ' && map[*y - 1][*x] == '1')
-				brain->up = true;
-			else if (map[*y][*x - 1] == '1')
-				brain->left = true;
-			else if (map[*y - 1][*x] == '1' && map[*y - 1][*x - 1] == ' ')
+			else if (len <= prev && map[*y - 1][*x] == '1')
 				brain->up = true;
 			else if (map[*y][*x + 1] == '1')
 				brain->right = true;
-		}
-		else if (*x == aux && *x > 0)
-		{
-			if (map[*y + 1][*x] == '1')
-				brain->down = true;
-			else if (map[*y - 1][*x] == '1')
-				brain->up = true;
 			else if (map[*y][*x - 1] == '1')
 				brain->left = true;
+			else if (map[*y - 1][*x] == 'F' &&
+				(*y - 1 == brain->init_y && *x == brain->init_x))
+				brain->up = true;
 		}
-		else if (*x > aux)
+		else if (len > next)
 		{
-			if (map[*y][*x - 1] == '1')
+			if (*x > next && map[*y][*x - 1] == '1')
 				brain->left = true;
+			else if (*x == next && map[*y + 1][*x] == '1')
+				brain->down = true;
+			else if (*x < init_prev && map[*y - 1][*x] == '1')
+				brain->up = true;
+			else if (*x < init_prev && map[*y][*x + 1] == '1')
+				brain->right = true;
+			else if (*x > init_prev && map[*y - 1][*x] == '1')
+				brain->up = true;
+			else if (*x > init_prev && map[*y][*x - 1] == '1')
+				brain->left = true;
+			else if (*x > init_prev && map[*y + 1][*x] == '1')
+				brain->down = true;
+			else if (*x == init_prev && map[*y - 1][*x] == '1')
+				brain->up = true;
 		}
-		else if (*x == 0 && map[*y - 1][*x] == '1')
-			brain->up = true;
-		else if (*x == 0 && map[*y][*x + 1] == '1' && map[*y - 1][*x] == ' ')
-			brain->right = true;
-		else if (map[*y][*x + 1] == '1')
-			brain->right = true;
+		else if (len < next)
+		{
+			if (*x == next && map[*y + 1][*x] == '1')
+				brain->down = true;
+			else if (*x >= init_prev && map[*y - 1][*x] == '1')
+				brain->up = true;
+			else if (*x >= init_prev && map[*y][*x - 1] == '1')
+				brain->left = true;
+			else if (*x >= init_prev && map[*y + 1][*x] == '1')
+				brain->down = true;
+			else if (*x < init_prev && map[*y][*x + 1] == '1')
+				brain->right = true;
+		}
 	}
-	else if (len < aux)
-	{
-		if (*x == 0 && map[*y - 1][*x] == '1')
-			brain->up = true;
-	}
+	else if (*x == len)
+		last_position(brain, map, y, x);
 }

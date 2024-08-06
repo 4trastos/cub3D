@@ -1,0 +1,88 @@
+LINEA:  0    COLUMNA:   12
+LINEA:  0    COLUMNA:   13
+LINEA:  0    COLUMNA:   14
+LINEA:  0    COLUMNA:   15
+LINEA:  0    COLUMNA:   16
+LINEA:  0    COLUMNA:   17
+LINEA:  0    COLUMNA:   18
+LINEA:  0    COLUMNA:   19
+LINEA:  0    COLUMNA:   20
+LINEA:  0    COLUMNA:   21
+LINEA:  0    COLUMNA:   22
+LINEA:  0    COLUMNA:   23
+LINEA:  0    COLUMNA:   24
+LINEA:  0    COLUMNA:   25
+LINEA:  0    COLUMNA:   26
+LINEA:  0    COLUMNA:   27
+LINEA:  0    COLUMNA:   28
+LINEA:  0    COLUMNA:   29
+LINEA:  0    COLUMNA:   30
+LINEA:  0    COLUMNA:   31
+LINEA:  0    COLUMNA:   32
+LINEA:  0    COLUMNA:   33
+LINEA:  0    COLUMNA:   34
+LINEA:  0    COLUMNA:   35
+LINEA:  0    COLUMNA:   36
+LINEA:  0    COLUMNA:   37
+LINEA:  1    COLUMNA:   37
+Inicio de la previa: --->>> 38   LINEA:  1    COLUMNA:   37
+LINEA:  2    COLUMNA:   37
+Inicio de la previa: --->>> 8   LINEA:  2    COLUMNA:   37
+LINEA:  2    COLUMNA:   36
+Inicio de la previa: --->>> 8   LINEA:  2    COLUMNA:   35
+Inicio de la previa: --->>> 8   LINEA:  2    COLUMNA:   34
+Inicio de la previa: --->>> 8   LINEA:  2    COLUMNA:   33
+Inicio de la previa: --->>> 8   LINEA:  2    COLUMNA:   32
+Inicio de la previa: --->>> 8   LINEA:  3    COLUMNA:   32
+Inicio de la previa: --->>> 8   LINEA:  3    COLUMNA:   32
+LINEA:  4    COLUMNA:   32
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   33
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   34
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   35
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   36
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   37
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   38
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   39
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   40
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   41
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   42
+Inicio de la previa: --->>> 8   LINEA:  4    COLUMNA:   42
+LINEA:  5    COLUMNA:   42
+Inicio de la previa: --->>> 0   LINEA:  5    COLUMNA:   42
+LINEA:  6    COLUMNA:   42
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   42
+LINEA:  6    COLUMNA:   41
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   40
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   39
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   38
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   37
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   36
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   35
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   34
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   33
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   32
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   31
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   30
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   29
+Inicio de la previa: --->>> 0   LINEA:  6    COLUMNA:   28
+Inicio de la previa: --->>> 0   LINEA:  7    COLUMNA:   28
+Inicio de la previa: --->>> 0   LINEA:  7    COLUMNA:   28
+LINEA:  8    COLUMNA:   28
+Inicio de la previa: --->>> 0   LINEA:  8    COLUMNA:   28
+LINEA:  9    COLUMNA:   28
+Inicio de la previa: --->>> 0   LINEA:  9    COLUMNA:   28
+LINEA:  10    COLUMNA:   28
+Inicio de la previa: --->>> 0   LINEA:  10    COLUMNA:   28
+LINEA:  11    COLUMNA:   28
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   28
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   28
+LINEA:  12    COLUMNA:   27
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   26
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   25
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   24
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   23
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   22
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   21
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   20
+Inicio de la previa: --->>> 0   LINEA:  12    COLUMNA:   19
+Inicio de la previa: --->>> 0   LINEA:  11    COLUMNA:   19

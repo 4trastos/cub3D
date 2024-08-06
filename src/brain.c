@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/18 12:31:13 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/05 10:45:41 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	walking_the_wall(char **map, t_brain *brain)
 		save_init(x, y, brain);
 	while (map[y] != NULL && brain->drowned == false)
 		walking_border(brain, map, &y, &x);
-	ft_printmap(map);
+	// ft_printmap(map);
 	if (y == brain->init_y && x == brain->init_x)
 		return (1);
 	return (0);
