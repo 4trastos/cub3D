@@ -20,6 +20,7 @@ SRC = src/main.c \
 		src/cartridge_2.c \
 		src/brain.c \
 		src/brain_2.c \
+		src/brain_3.c \
 		bits/binary_encoding.c \
 		utils/utils.c \
 		utils/utils_02.c \

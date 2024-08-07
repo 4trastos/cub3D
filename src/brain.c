@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/07 10:14:34 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:03:39 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	wanted_road(t_brain *brain, char **map, int *y, int *x)
 void	walking_border(t_brain *brain, char **map, int *y, int *x)
 {
 	wanted_road(brain, map, y, x);
-	printf("LINEA:  %d    COLUMNA:   %d\n", *y, *x);
+	// printf("LINEA:  %d    COLUMNA:   %d\n", *y, *x);
 	if (brain->right)
 	{
 		map[*y][*x] = 'F';

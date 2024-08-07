@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/06 10:30:14 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:09:56 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,5 +172,8 @@ void			last_line(t_brain *brain, char **map, int *y, int *x);
 void			intermediate_lines(t_brain *brain, char **map, int *y, int *x);
 void			last_position(t_brain *brain, char **map, int *y, int *x);
 void			first_position(t_brain *brain, char **map, int *y, int *x);
+void			len_equal_next(t_brain *brain, char **map, int *y, int *x);
+void			len_more_next(t_brain *brain, char **map, int *y, int *x);
+void			len_less_next(t_brain *brain, char **map, int *y, int *x);
 
 #endif
