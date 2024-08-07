@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/05 10:45:41 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/07 10:14:34 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	wanted_road(t_brain *brain, char **map, int *y, int *x)
 void	walking_border(t_brain *brain, char **map, int *y, int *x)
 {
 	wanted_road(brain, map, y, x);
+	printf("LINEA:  %d    COLUMNA:   %d\n", *y, *x);
 	if (brain->right)
 	{
 		map[*y][*x] = 'F';
@@ -81,7 +82,6 @@ int	walking_the_wall(char **map, t_brain *brain)
 		save_init(x, y, brain);
 	while (map[y] != NULL && brain->drowned == false)
 		walking_border(brain, map, &y, &x);
-	// ft_printmap(map);
 	if (y == brain->init_y && x == brain->init_x)
 		return (1);
 	return (0);
