@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/07 14:10:20 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:15:25 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ void	intermediate_lines(t_brain *brain, char **map, int *y, int *x)
 {
 	int	next;
 	int	len;
-	int	init_prev;
 
-	init_prev = get_prev(map[*y - 1]);
 	len = ft_strlencust(map[*y]) - 1;
 	next = ft_strlencust(map[*y + 1]) - 1;
 	if (*x == 0)

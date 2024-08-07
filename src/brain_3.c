@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:57:01 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/07 14:09:40 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:15:01 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,12 @@ void	len_more_next(t_brain *brain, char **map, int *y, int *x)
 		brain->up = true;
 	else if (*x < init_prev && map[*y][*x + 1] == '1')
 		brain->right = true;
-	else if (*x > init_prev && map[*y - 1][*x] == '1')
+	else if (*x >= init_prev && map[*y - 1][*x] == '1')
 		brain->up = true;
-	else if (*x > init_prev && map[*y][*x - 1] == '1')
+	else if (*x >= init_prev && map[*y][*x - 1] == '1')
 		brain->left = true;
-	else if (*x > init_prev && map[*y + 1][*x] == '1')
+	else if (*x >= init_prev && map[*y + 1][*x] == '1')
 		brain->down = true;
-	else if (*x == init_prev && map[*y - 1][*x] == '1')
-		brain->up = true;
 }
 
 void	len_less_next(t_brain *brain, char **map, int *y, int *x)
