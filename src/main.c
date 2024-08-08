@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/17 18:25:13 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/08 10:14:29 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**arg_check(int argc, char **argv, t_design *design, char **map)
 	if (file == 0)
 		error_msg("🚨 The file is invalid - use a .cub file! 🚨", NULL);
 	else if (file == 2)
-		error_msg("🚨 The file is invalid - it may be hidden.! 🚨", NULL);
+		error_msg("🚨 The file is invalid - The file has no extension! 🚨", NULL);
 	return (map_check(fd, design, map, &brain));
 }
 

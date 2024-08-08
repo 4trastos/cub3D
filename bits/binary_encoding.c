@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_encoding.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
+/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:02:03 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/13 19:52:59 by usuario          ###   ########.fr       */
+/*   Updated: 2024/08/07 14:21:12 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ unsigned char	swap_bits(unsigned char octet)
 {
 	return ((octet >> 4) | (octet << 4));
 }
-
