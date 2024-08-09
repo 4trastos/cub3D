@@ -3,8 +3,8 @@ SO ./maps/assets/VENT_1A.xpm
 WE ./maps/assets/TECH_1A.xpm
 EA ./maps/assets/TECH_3G.xpm
 
-F 20,22,25
-C 13,14,15
+F 52,162,35
+C 81,209,246
 
 111111111
 101000001

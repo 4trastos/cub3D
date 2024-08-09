@@ -2,14 +2,17 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux -g3 -fsanitize=address
 
 RM = rm -f
 
 LIB = ar rcs
 
-# LINKS = -I /usr/local/include -L /usr/local/lib \
-#     -l mlx -l ft -framework OpenGL -framework Appkit
+LIBMLX = ./MLX
+
+MLX	= -I ./include -I $(LIBMLX)/include
+
+LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRC = src/main.c \
 		src/error_free.c \
@@ -21,6 +24,7 @@ SRC = src/main.c \
 		src/brain.c \
 		src/brain_2.c \
 		src/brain_3.c \
+		src/raycast.c \
 		bits/binary_encoding.c \
 		utils/utils.c \
 		utils/utils_02.c \
@@ -28,14 +32,18 @@ SRC = src/main.c \
 		utils/ft_itoa.c \
 		utils/ft_atoi.c \
 		utils/ft_split.c \
-		utils/get_next_line.c
+		utils/get_next_line.c \
+		utils/raycast_utils.c
 
 OBJS = $(SRC:.c=.o)
 
-all: $(NAME) #./minilibx-linux/Makefile
+all: libmlx $(NAME)
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(OBJS) $(MLX) $(LIBS) $(CFLAGS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
