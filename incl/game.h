@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:03:06 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:12:15 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:25:29 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,16 @@
 
 //*** BITWISE ***//
 
-void			print_bits(unsigned char octet);
-unsigned char	reverse_bits(unsigned char octet);
-unsigned char	swap_bits(unsigned char octet);
+void				print_bits(unsigned char octet);
+unsigned char		reverse_bits(unsigned char octet);
+unsigned char		swap_bits(unsigned char octet);
+unsigned long long	pack_coordinates(int y, int x);
+void				unpack_coord(unsigned long long packed, int *y, int *x);
+char				*int_to_bin(int num, int bits);
+unsigned long long	bin_to_int(char *bin);
+
+//*** MORE UTILS ***//
+
+void				skip_space(char *str, int *x);
 
 #endif

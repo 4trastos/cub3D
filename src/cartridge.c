@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:33:16 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:23:56 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:50:31 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int	coordinates(char *str, t_design *cartridge)
 	flag = 0;
 	skip_whitespace(&str);
 	value = (str[0] << 8 | str[1]);
-	if (value == NO && str[2] == ' ' && cartridge->no == NULL)
+	if (value == NO && cartridge->no == NULL)
 		flag = NO;
-	else if (value == SO && str[2] == ' ' && cartridge->so == NULL)
+	else if (value == SO && cartridge->so == NULL)
 		flag = SO;
-	else if (value == WE && str[2] == ' ' && cartridge->we == NULL)
+	else if (value == WE && cartridge->we == NULL)
 		flag = WE;
-	else if (value == EA && str[2] == ' ' && cartridge->ea == NULL)
+	else if (value == EA && cartridge->ea == NULL)
 		flag = EA;
 	if (flag != 0)
 	{

@@ -6,11 +6,21 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 13:33:16 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 08:30:08 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/18 11:48:11 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
+
+void	skip_space(char *str, int *x)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] == ' ' && str[i] != '\0')
+		i++;
+	*x += i;
+}
 
 int	player_validator(char **map)
 {

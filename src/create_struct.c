@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:59:25 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:48:51 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/07/15 15:18:08 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ void	new_brain(t_brain *new)
 	new->init_y = 0;
 	new->cartridge = NULL;
 	new->game = NULL;
+	new->drowned = false;
+	new->down = false;
+	new->left = false;
+	new->right = false;
+	new->up = false;
 }

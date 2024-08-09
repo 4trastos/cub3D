@@ -6,24 +6,12 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:52:59 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:17:00 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/cube3d.h"
 
-static void	ft_printmap(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i] != NULL)
-	{
-		ft_putstr(map[i]);
-		write(1, "\n", 1);
-		i++;
-	}
-}
 
 char	**arg_check(int argc, char **argv, t_design *design, char **map)
 {
@@ -44,7 +32,7 @@ char	**arg_check(int argc, char **argv, t_design *design, char **map)
 	if (file == 0)
 		error_msg("🚨 The file is invalid - use a .cub file! 🚨", NULL);
 	else if (file == 2)
-		error_msg("🚨 The file is invalid - it may be hidden.! 🚨", NULL);
+		error_msg("🚨 The file is invalid - The file has no extension! 🚨", NULL);
 	return (map_check(fd, design, map, &brain));
 }
 
@@ -58,9 +46,8 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		error_msg("🚨 You have to upload a file to play! 🚨", NULL);
 	map = arg_check(argc, argv, &cartridge, map);
-	ft_printmap(map);
-	// init_game(map, design);
-	free(map);
+	init_window(&cartridge);
+	free_map(map);
 	free_struct(&cartridge);
 	return (0);
 }
