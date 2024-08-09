@@ -1,7 +1,7 @@
-/home/davgalle/Documents/CURSUS/CIRCLE_05/cub3d/MLX/build/CMakeFiles/mlx42.dir
-/home/davgalle/Documents/CURSUS/CIRCLE_05/cub3d/MLX/build/CMakeFiles/edit_cache.dir
-/home/davgalle/Documents/CURSUS/CIRCLE_05/cub3d/MLX/build/CMakeFiles/rebuild_cache.dir
-/home/davgalle/Documents/CURSUS/CIRCLE_05/cub3d/MLX/build/CMakeFiles/list_install_components.dir
-/home/davgalle/Documents/CURSUS/CIRCLE_05/cub3d/MLX/build/CMakeFiles/install.dir
-/home/davgalle/Documents/CURSUS/CIRCLE_05/cub3d/MLX/build/CMakeFiles/install/local.dir
-/home/davgalle/Documents/CURSUS/CIRCLE_05/cub3d/MLX/build/CMakeFiles/install/strip.dir
+/home/davgalle/Documents/CURSUS/CIRCLE_05/cube3d/MLX/build/CMakeFiles/mlx42.dir
+/home/davgalle/Documents/CURSUS/CIRCLE_05/cube3d/MLX/build/CMakeFiles/edit_cache.dir
+/home/davgalle/Documents/CURSUS/CIRCLE_05/cube3d/MLX/build/CMakeFiles/rebuild_cache.dir
+/home/davgalle/Documents/CURSUS/CIRCLE_05/cube3d/MLX/build/CMakeFiles/list_install_components.dir
+/home/davgalle/Documents/CURSUS/CIRCLE_05/cube3d/MLX/build/CMakeFiles/install.dir
+/home/davgalle/Documents/CURSUS/CIRCLE_05/cube3d/MLX/build/CMakeFiles/install/local.dir
+/home/davgalle/Documents/CURSUS/CIRCLE_05/cube3d/MLX/build/CMakeFiles/install/strip.dir
