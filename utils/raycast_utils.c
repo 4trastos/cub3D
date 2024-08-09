@@ -59,26 +59,30 @@ void	get_player(t_p *p, char **map)
 			{
 				p->x = x;
 				p->y = y;
-				p->angle = RADIAN * 90;
+				p->vec_x = 0;
+				p->vec_y = -1.0f;
 
 			}
 			else if (map[y][x] == 'S')
 			{
 				p->x = x;
 				p->y = y;
-				p->angle = RADIAN * 270;
+				p->vec_x = 0;
+				p->vec_y = 1.0f;
 			}
 			else if (map[y][x] == 'E')
 			{
 				p->x = x;
 				p->y = y;
-				p->angle = RADIAN * 180;
+				p->vec_x = 1.0f;
+				p->vec_y = 0;
 			}
 			else if (map[y][x] == 'W')
 			{
 				p->x = x;
 				p->y = y;
-				p->angle = 0;
+				p->vec_x = -1.0f;
+				p->vec_y = 0;
 			}
 			x++;
 		}
