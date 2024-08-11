@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:17:52 by davgalle          #+#    #+#             */
-/*   Updated: 2024/07/11 13:58:37 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:01:12 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,20 @@ int	map_validator(char **map, t_brain *brain)
 
 int	ft_strmapcmp(char *str, char *dst, int len)
 {
-	int	i;
-	int	j;
+	char	*end;
+	int		i;
 
-	j = 0;
-	while (str[j] != '/')
-		j++;
-	j++;
-	if (str[j] == '.')
+	end = NULL;
+	while (*str != '/')
+		str++;
+	str++;
+	if (*str == '.')
+	{
+		end = ft_strchr(str + 1, '.');
+		if (end != NULL)
+			return (1);
 		return (2);
+	}
 	i = 0;
 	while (str[i] != '\0')
 		i++;
@@ -75,10 +80,10 @@ char	*read_file(int fd, char *str)
 	return (str);
 }
 
-
 char	**map_check(int fd, t_design *cartridge, char **map, t_brain *brain)
 {
 	char	**data;
+	char	**copy;
 	char	*str;
 	size_t	y;
 
@@ -93,8 +98,13 @@ char	**map_check(int fd, t_design *cartridge, char **map, t_brain *brain)
 	free(str);
 	create_cartridge(data, cartridge, y);
 	free_map(data);
+	copy = dupmatrix(cartridge->map);
+	if (map_validator(copy, brain) == 0)
+	{
+		free_map (copy);
+		return (NULL);
+	}
 	map = dupmatrix(cartridge->map);
-	if (map_validator(map, brain) == 0)
-		return (map);
+	free_map (copy);
 	return (map);
 }
