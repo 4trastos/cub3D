@@ -19,13 +19,13 @@
 # define LEFT +1
 # define UP -1
 # define DOWN +1
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 200
+# define HEIGHT 200
 # define PI 3.14159265358979323846
 # define RADIAN 0.017453292519943295
 # define FOV 90
 
-# include "../MLX/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -92,17 +92,20 @@ typedef struct s_p
 	float		px;
 	float		py;
 	char		**map;
-	float		angle;
+	float		vec_y;
+	float		vec_x;
 	mlx_image_t	*player;
 }	t_p;
 
 typedef struct s_ray
 {
 	float		ra;
-	float		ry;
-	float		rx;
-	float		ox;
-	float		oy;
+	float		delta_dist_x;
+	float		delta_dist_y;
+	float		ray_dir_x;
+	float		ray_dir_y;
+	float		side_dist_x;
+	float		side_dist_y;
 	int			mx;
 	int			my;
 }	t_ray;
@@ -114,6 +117,8 @@ typedef struct s_g
 	mlx_t		*mlx;
 	int			flag;
 	mlx_image_t	*ceiling;
+	float		plane_x;
+	float		plane_y;
 	int			color_f[3];
 	int			color_c[3];
 }	t_g;
@@ -223,5 +228,8 @@ void			first_position(t_brain *brain, char **map, int *y, int *x);
 void			len_equal_next(t_brain *brain, char **map, int *y, int *x);
 void			len_more_next(t_brain *brain, char **map, int *y, int *x);
 void			len_less_next(t_brain *brain, char **map, int *y, int *x);
+void			first_line(t_brain *brain, char **map, int *y, int *x);
+void			last_line(t_brain *brain, char **map, int *y, int *x);
+void			intermediate_lines(t_brain *brain, char **map, int *y, int *x);
 
 #endif
