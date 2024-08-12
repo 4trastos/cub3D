@@ -91,10 +91,8 @@ float	get_dist(float px, float py, float rx, float ry)
 
 void	rays(t_g *game)
 {
-	t_ray	rays[WIDTH];
+	t_ray	rays;
 	float	camera_x;
-	float	ray_dist_x;
-	float	ray_dist_y;
 	float	perp_wall_dist;
 	int		hit;
 	int		step_x;
@@ -114,27 +112,60 @@ void	rays(t_g *game)
 		game->flag = 1;
 	while (++nr < WIDTH){
 		camera_x = 2 * nr / (double)WIDTH - 1;
-		rays[nr].rx = game->p.vec_x + game->plane_x * camera_x;
-		rays[nr].ry = game->p.vec_y + game->plane_y * camera_x;
-		rays[nr].offset_x = sqrt(1 + (rays[nr].ry * rays[nr]. ry) / (rays[nr].rx * rays[nr].rx));
-		rays[nr].offset_y = sqrt(1 + (rays[nr].rx * rays[nr]. rx) / (rays[nr].ry * rays[nr].ry));
-		if (game->p.vec_x < 0){ray_dist_x = (game->p.px - (float)game->p.player->instances[0].x) * rays[nr].offset_x; step_x = -1;}
-		else{ray_dist_x = ((float)game->p.player->instances[0].x + 1.0 - game->p.px) * rays[nr].offset_x; step_x = 1;}
-		if (game->p.vec_y < 0){ray_dist_y = (game->p.py - (float)game->p.player->instances[0].y) * rays[nr].offset_y; step_y = -1;}
-		else{ray_dist_x = ((float)game->p.player->instances[0].y + 1.0 - game->p.py) * rays[nr].offset_y; step_y = 1;}
-		rays[nr].mx = (int)game->p.px;
-		rays[nr].my = (int)game->p.py;
+		rays.ray_dir_x = game->p.vec_x + game->plane_x * camera_x;
+		rays.ray_dir_y = game->p.vec_y + game->plane_y * camera_x;
+		rays.delta_dist_x = sqrt((rays.ray_dir_y * rays.ray_dir_y) / (rays.ray_dir_x * rays.ray_dir_x));
+		rays.delta_dist_y = sqrt((rays.ray_dir_x * rays.ray_dir_x) / (rays.ray_dir_y * rays.ray_dir_y));
+		rays.mx = (int)game->p.px;
+		rays.my = (int)game->p.py;
+		if (rays.ray_dir_x < 0)
+		{
+			step_x = -1;
+			rays.side_dist_x = (game->p.px - (float)rays.mx) * rays.delta_dist_x;
+		}
+		else
+		{
+			step_x = 1;
+			rays.side_dist_x = ((float)rays.mx + 1.0f - game->p.px) * rays.delta_dist_x;
+		}
+		if (rays.ray_dir_y < 0)
+		{
+			step_y = -1;
+			rays.side_dist_y = (game->p.py - (float)rays.my) * rays.delta_dist_y;
+		}
+		else
+		{
+			step_y = 1;
+			rays.side_dist_y = ((float)rays.my + 1.0f - game->p.py) * rays.delta_dist_y;
+		}
 		hit = 0;
 		while (hit == 0)
 		{
-			if (ray_dist_x > rays[nr].ry){ray_dist_y += rays[nr].offset_y; rays[nr].my += step_y; side = 1;}
-			else{ray_dist_x += rays[nr].offset_x; rays[nr].mx += step_x; side = 0;}
-			if (game->p.map[rays[nr].my][rays[nr].mx] == '1'){hit = 1;}
+			if (rays.side_dist_x < rays.side_dist_y)
+			{
+				rays.side_dist_x += rays.delta_dist_x;
+				rays.mx += step_x;
+				side = 0;
+			}
+			else
+			{
+				rays.side_dist_y += rays.delta_dist_x;
+				rays.my += step_y;
+				side = 1;
+			}
+			if (game->p.map[rays.my][rays.mx] == '1')
+				hit = 1;
 		}
-		if (side == 0){perp_wall_dist = (ray_dist_x - rays[nr].offset_x);}
-		else{perp_wall_dist = (ray_dist_y - rays[nr].offset_y);}
-		if (side == 0){draw_wall((float)HEIGHT / perp_wall_dist, nr, 0xFF20AA00, game);}
-		else{draw_wall((float)HEIGHT / perp_wall_dist, nr, 0xFFAA2000, game);}
+		if (side == 0)
+		{
+			perp_wall_dist = (rays.side_dist_x - rays.delta_dist_x);
+			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0xFFAA9900, game);
+		}
+		else
+		{
+			perp_wall_dist = (rays.side_dist_y - rays.delta_dist_y);
+			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0x99AAFF00, game);
+		}
 	}
 }
 
@@ -216,6 +247,7 @@ void    init_window(t_design *catridge)
 		if (game.p.vec_y < 0){game.plane_x = 0.66; game.plane_y = 0;}
 		else{game.plane_x = -0.66; game.plane_y = 0;}		
 	}
+	//printf("dir X: %f dir Y: %f\n plane X: %f plane Y: %f\n", game.p.vec_x, game.p.vec_y, game.plane_x, game.plane_y);
 	ft_memset(game.p.player->pixels, 255, game.p.player->width * game.p.player->height * sizeof(int32_t));
 	mlx_image_to_window(game.mlx, game.p.player, (game.p.x + 0.5), (game.p.y + 0.5));
 	game.p.px = game.p.x + 0.5;
