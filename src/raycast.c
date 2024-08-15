@@ -75,8 +75,7 @@ void	draw_wall(float wall_height, int nr, unsigned int color, t_g *game)
 	y = 0;
 	while (y < wall_height)
 	{
-		if (y + wall_offset < HEIGHT)
-			mlx_put_pixel(game->ceiling, nr, y + wall_offset, color);
+		mlx_put_pixel(game->ceiling, nr, y + wall_offset, color);
 		y++;
 	}
 	mlx_image_to_window(game->mlx, game->ceiling, 0, 0);
@@ -112,10 +111,10 @@ void	rays(t_g *game)
 		game->flag = 1;
 	while (++nr < WIDTH){
 		camera_x = 2 * nr / (double)WIDTH - 1;
-		rays.ray_dir_x = game->p.vec_x + game->plane_x * camera_x;
 		rays.ray_dir_y = game->p.vec_y + game->plane_y * camera_x;
-		rays.delta_dist_x = fabs(1 / rays.ray_dir_x);
+		rays.ray_dir_x = game->p.vec_x + game->plane_x * camera_x;
 		rays.delta_dist_y = fabs(1 / rays.ray_dir_y);
+		rays.delta_dist_x = fabs(1 / rays.ray_dir_x);
 		rays.mx = (int)game->p.px;
 		rays.my = (int)game->p.py;
 		if (rays.ray_dir_x < 0)
@@ -149,7 +148,7 @@ void	rays(t_g *game)
 			}
 			else
 			{
-				rays.side_dist_y += rays.delta_dist_x;
+				rays.side_dist_y += rays.delta_dist_y;
 				rays.my += step_y;
 				side = 1;
 			}
@@ -159,12 +158,12 @@ void	rays(t_g *game)
 		if (side == 0)
 		{
 			perp_wall_dist = (rays.side_dist_x - rays.delta_dist_x);
-			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0x00FFFF00, game);
+			draw_wall(((float)HEIGHT / perp_wall_dist), nr, rgb_to_hex(0, 255, 255, 255), game);
 		}
 		else
 		{
 			perp_wall_dist = (rays.side_dist_y - rays.delta_dist_y);
-			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0x33FFFF00, game);
+			draw_wall(((float)HEIGHT / perp_wall_dist), nr, rgb_to_hex(100, 255, 255, 255), game);
 		}
 	}
 }
