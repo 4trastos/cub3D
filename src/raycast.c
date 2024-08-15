@@ -114,8 +114,8 @@ void	rays(t_g *game)
 		camera_x = 2 * nr / (double)WIDTH - 1;
 		rays.ray_dir_x = game->p.vec_x + game->plane_x * camera_x;
 		rays.ray_dir_y = game->p.vec_y + game->plane_y * camera_x;
-		rays.delta_dist_x = sqrt((rays.ray_dir_y * rays.ray_dir_y) / (rays.ray_dir_x * rays.ray_dir_x));
-		rays.delta_dist_y = sqrt((rays.ray_dir_x * rays.ray_dir_x) / (rays.ray_dir_y * rays.ray_dir_y));
+		rays.delta_dist_x = fabs(1 / rays.ray_dir_x);
+		rays.delta_dist_y = fabs(1 / rays.ray_dir_y);
 		rays.mx = (int)game->p.px;
 		rays.my = (int)game->p.py;
 		if (rays.ray_dir_x < 0)
@@ -159,12 +159,12 @@ void	rays(t_g *game)
 		if (side == 0)
 		{
 			perp_wall_dist = (rays.side_dist_x - rays.delta_dist_x);
-			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0xFFAA9900, game);
+			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0x00FFFF00, game);
 		}
 		else
 		{
 			perp_wall_dist = (rays.side_dist_y - rays.delta_dist_y);
-			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0x99AAFF00, game);
+			draw_wall(((float)HEIGHT / perp_wall_dist), nr, 0x33FFFF00, game);
 		}
 	}
 }
@@ -184,16 +184,12 @@ void	key_press(mlx_key_data_t key, void *param)
 		mlx_close_window((void *)game->mlx);
 	if (key.key == MLX_KEY_W && key.action != MLX_RELEASE)
 	{
-		game->p.player->instances[0].x = game->p.px + (float)speed_x;
-		game->p.player->instances[0].y = game->p.py + (float)speed_y;
 		game->p.px += speed_x;
 		game->p.py += speed_y;
 		rays(game);
 	}
 	if (key.key == MLX_KEY_S && key.action != MLX_RELEASE)
 	{
-		game->p.player->instances[0].x = game->p.px - (float)speed_x;
-		game->p.player->instances[0].y = game->p.py - (float)speed_y;
 		game->p.px += -speed_x;
 		game->p.py += -speed_y;
 		rays(game);
@@ -202,16 +198,16 @@ void	key_press(mlx_key_data_t key, void *param)
 	{
 		old_vec_x = game->p.vec_x;
 		old_vec_y = game->p.vec_y;
-		game->p.vec_x = old_vec_x * cos(-RADIAN)- old_vec_y * sin(-RADIAN);
-		game->p.vec_y = old_vec_x * sin(-RADIAN)+ old_vec_y * cos(-RADIAN);
+		game->p.vec_x = old_vec_x * cos(RADIAN)- old_vec_y * sin(RADIAN);
+		game->p.vec_y = old_vec_x * sin(RADIAN)+ old_vec_y * cos(RADIAN);
 		rays(game);
 	}
 	if (key.key == MLX_KEY_LEFT && key.action != MLX_RELEASE)
 	{
 		old_vec_x = game->p.vec_x;
 		old_vec_y = game->p.vec_y;
-		game->p.vec_x = old_vec_x * cos(RADIAN)- old_vec_y * sin(RADIAN);
-		game->p.vec_y = old_vec_x* sin(RADIAN)+ old_vec_y * cos(RADIAN);
+		game->p.vec_x = old_vec_x * cos(-RADIAN)- old_vec_y * sin(-RADIAN);
+		game->p.vec_y = old_vec_x* sin(-RADIAN)+ old_vec_y * cos(-RADIAN);
 		rays(game);
 	}
 }
@@ -238,7 +234,6 @@ void    init_window(t_design *catridge)
 	game.p.y = player.y;
 	game.p.vec_x = player.vec_x;
 	game.p.vec_y = player.vec_y;
-	game.p.player = mlx_new_image(game.mlx, 20, 20);
 	if (game.p.vec_x != 0){
 		if (game.p.vec_x < 0) {game.plane_x = 0; game.plane_y = 0.66;}
 		else{game.plane_x = 0; game.plane_y = -0.66;}
@@ -248,8 +243,6 @@ void    init_window(t_design *catridge)
 		else{game.plane_x = -0.66; game.plane_y = 0;}		
 	}
 	//printf("dir X: %f dir Y: %f\n plane X: %f plane Y: %f\n", game.p.vec_x, game.p.vec_y, game.plane_x, game.plane_y);
-	ft_memset(game.p.player->pixels, 255, game.p.player->width * game.p.player->height * sizeof(int32_t));
-	mlx_image_to_window(game.mlx, game.p.player, (game.p.x + 0.5), (game.p.y + 0.5));
 	game.p.px = game.p.x + 0.5;
 	game.p.py = game.p.y + 0.5;
 	game.p.map = dupmatrix(catridge->map);
