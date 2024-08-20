@@ -24,6 +24,8 @@
 # define PI 3.14159265358979323846
 # define RADIAN 0.017453292519943295
 # define FOV 90
+# define TEX_WIDTH
+# define TEX_HEIGHT
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
@@ -106,6 +108,9 @@ typedef struct s_ray
 	float		ray_dir_y;
 	float		side_dist_x;
 	float		side_dist_y;
+	float		perp_wall_dist;
+	int			step_x;
+	int			step_y;
 	int			mx;
 	int			my;
 }	t_ray;
@@ -139,10 +144,19 @@ void			free_struct(t_design *cartridge);
 //*** GAME ***//
 
 void			init_window(t_design *cartridge);
-float			get_dist(float px, float py, float rx, float ry);
 void			draw_wall(float wall_height, int nr,
 					unsigned int color, t_g *game);
+void    		draw_ceiling(mlx_image_t *background,
+					int *color_c, int *color_f);
+unsigned int 	rgb_to_hex(int r, int g, int b, int a);
 void			rays(t_g *game);
+void			key_press(mlx_key_data_t key, void *param);
+void    		key_left(t_g *game);
+void    		key_right(t_g *game);
+void    		key_w(t_g *game, float speed_x, float speed_y);
+void    		key_a(t_g *game, float speed_x, float speed_y);
+void    		key_s(t_g *game, float speed_x, float speed_y);
+void    		key_d(t_g *game, float speed_x, float speed_y);
 
 //*** PARSE ***//
 
