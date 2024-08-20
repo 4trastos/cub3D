@@ -57,6 +57,10 @@ void    draw_rays(int nr, int side, t_ray *rays, t_g *game)
 	{
 		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
+		uint32_t color = tex[TEX_HEIGHT * tex_y + tex_x];
+		if (side == 1)
+			color = (color >> 1) & 8355711;
+		mlx_put_pixel(game->ceiling, nr, y, color);
 	}
 }
 
