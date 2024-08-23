@@ -24,8 +24,8 @@
 # define PI 3.14159265358979323846
 # define RADIAN 0.017453292519943295
 # define FOV 90
-# define TEX_WIDTH
-# define TEX_HEIGHT
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>

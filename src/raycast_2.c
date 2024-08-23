@@ -23,9 +23,10 @@ void    draw_rays(int nr, int side, t_ray *rays, t_g *game)
 	int		draw_end;
 	float	tex_pos;
 	int		y;
+	uint32_t color;
 	mlx_texture_t *tex;
 
-	tex = mlx_load_png("../tetxures/texture.png");
+	tex = mlx_load_png("../textures/texture.png");
     if (side == 0)
 	{
 		rays->perp_wall_dist = (rays->side_dist_x - rays->delta_dist_x);
@@ -51,16 +52,17 @@ void    draw_rays(int nr, int side, t_ray *rays, t_g *game)
 	if (side == 0 && rays->ray_dir_y < 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
 	step = 1.0f * (float)TEX_HEIGHT / line_hight;
-	tex_pos = (draw_start - h / 2 + line_hight / 2) * step;
+	tex_pos = (draw_start - HEIGHT/ 2 + line_hight / 2) * step;
 	y = draw_start - 1;
 	while (++y < draw_end)
 	{
 		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
-		uint32_t color = tex[TEX_HEIGHT * tex_y + tex_x];
+		color = tex->pixels[TEX_HEIGHT * tex_y + tex_x];
 		if (side == 1)
 			color = (color >> 1) & 8355711;
 		mlx_put_pixel(game->ceiling, nr, y, color);
+		(void)tex;
 	}
 }
 
