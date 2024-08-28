@@ -26,7 +26,13 @@ void    draw_rays(int nr, int side, t_ray *rays, t_g *game)
 	uint32_t color;
 	mlx_texture_t *tex;
 
-	tex = mlx_load_png("../textures/texture.png");
+	tex = NULL;
+	tex = mlx_load_png("./../textures/64x/Grass.png");
+	if (!tex)
+    {
+        printf("Error: No se pudo cargar la textura.\n");
+        return;
+    }
     if (side == 0)
 	{
 		rays->perp_wall_dist = (rays->side_dist_x - rays->delta_dist_x);
@@ -58,12 +64,14 @@ void    draw_rays(int nr, int side, t_ray *rays, t_g *game)
 	{
 		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
-		color = tex->pixels[TEX_HEIGHT * tex_y + tex_x];
+		int pixel_index = (tex_y * tex->width + tex_x) * 4;
+        color = (tex->pixels[pixel_index + 3] << 24) | (tex->pixels[pixel_index] << 16) |
+                (tex->pixels[pixel_index + 1] << 8) | tex->pixels[pixel_index + 2];
 		if (side == 1)
 			color = (color >> 1) & 8355711;
 		mlx_put_pixel(game->ceiling, nr, y, color);
-		(void)tex;
 	}
+	mlx_delete_texture(tex);
 }
 
 int ray_hit(t_ray *rays, t_g *game)
