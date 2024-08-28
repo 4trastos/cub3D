@@ -14,64 +14,29 @@
 
 void    draw_rays(int nr, int side, t_ray *rays, t_g *game)
 {
-	float	wall_x;
-	int		tex_x;
-	int		tex_y;
-	float	line_hight;
-	float	step;
-	int		draw_start;
-	int		draw_end;
-	float	tex_pos;
-	int		y;
-	uint32_t color;
+	t_tex_data	data;
 	mlx_texture_t *tex;
 
-	tex = NULL;
-	tex = mlx_load_png("./../textures/64x/Grass.png");
+	if (side == 0 && rays->ray_dir_x < 0)
+		tex = game->tex_1;
+	else if (side == 0 && rays->ray_dir_x > 0)
+		tex = game->tex_2;
+	else if (rays->ray_dir_y > 0)
+		tex = game->tex_3;
+	else
+		tex = game->tex_4;
 	if (!tex)
     {
         printf("Error: No se pudo cargar la textura.\n");
         return;
     }
-    if (side == 0)
+    draw_rays_aux(&data, rays, game, side);
+	set_data(&data, side, rays);
+	while (++data.y <= data.draw_end)
 	{
-		rays->perp_wall_dist = (rays->side_dist_x - rays->delta_dist_x);
-		//draw_wall(((float)HEIGHT / rays->perp_wall_dist), nr, rgb_to_hex(0, 255, 255, 255), game);
-		wall_x = game->p.py + rays->perp_wall_dist * rays->ray_dir_y;
+		put_texture(&data, tex);
+		mlx_put_pixel(game->ceiling, nr, data.y, data.color);
 	}
-	else
-	{
-		rays->perp_wall_dist = (rays->side_dist_y - rays->delta_dist_y);
-		//draw_wall(((float)HEIGHT / rays->perp_wall_dist), nr, rgb_to_hex(170, 255, 255, 255), game);
-		wall_x = game->p.px + rays->perp_wall_dist * rays->ray_dir_x;
-	}
-	line_hight = (float)HEIGHT / rays->perp_wall_dist;
-	draw_start = -line_hight / 2.0f + (float)HEIGHT / 2.0f;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_hight / 2.0f + (float)HEIGHT / 2.0f;
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
-	tex_x = (int)(wall_x * (float)TEX_WIDTH);
-	if (side == 0 && rays->ray_dir_x > 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
-	if (side == 0 && rays->ray_dir_y < 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
-	step = 1.0f * (float)TEX_HEIGHT / line_hight;
-	tex_pos = (draw_start - HEIGHT/ 2 + line_hight / 2) * step;
-	y = draw_start - 1;
-	while (++y < draw_end)
-	{
-		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
-		tex_pos += step;
-		int pixel_index = (tex_y * tex->width + tex_x) * 4;
-        color = (tex->pixels[pixel_index + 3] << 24) | (tex->pixels[pixel_index] << 16) |
-                (tex->pixels[pixel_index + 1] << 8) | tex->pixels[pixel_index + 2];
-		if (side == 1)
-			color = (color >> 1) & 8355711;
-		mlx_put_pixel(game->ceiling, nr, y, color);
-	}
-	mlx_delete_texture(tex);
 }
 
 int ray_hit(t_ray *rays, t_g *game)

@@ -12,44 +12,13 @@
 
 #include "../incl/cube3d.h"
 
-void    key_w(t_g *game, float speed_x, float speed_y)
+void move_player(t_g *game, float move_x, float move_y)
 {
-    if (game->p.map[(int)(game->p.py + speed_y)][(int)(game->p.px + speed_x)] != '1')
+    if (game->p.map[(int)(game->p.py + move_y)][(int)(game->p.px + move_x)] != '1')
 	{
-		game->p.px += speed_x;
-		game->p.py += speed_y;
+		game->p.px += move_x;
+		game->p.py += move_y;
 	}
-	rays(game);
-}
-
-void    key_s(t_g *game, float speed_x, float speed_y)
-{
-    if (game->p.map[(int)(game->p.py - speed_y)][(int)(game->p.px - speed_x)] != '1')
-	{
-		game->p.px += -speed_x;
-		game->p.py += -speed_y;
-	}
-	rays(game);
-}
-
-void    key_d(t_g *game, float speed_x, float speed_y)
-{
-    if (game->p.map[(int)(game->p.py - speed_x)][(int)(game->p.px - speed_y)] != '1')
-	{
-		game->p.px += -speed_y;
-		game->p.py += -speed_x;
-	}
-	rays(game);
-}
-
-void    key_a(t_g *game, float speed_x, float speed_y)
-{
-    if (game->p.map[(int)(game->p.py + speed_x)][(int)(game->p.px + speed_y)] != '1')
-	{
-		game->p.px += speed_y;
-		game->p.py += speed_x;
-	}
-	rays(game);
 }
 
 void	key_press(mlx_key_data_t key, void *param)
@@ -61,19 +30,25 @@ void	key_press(mlx_key_data_t key, void *param)
 	game = param;
 	speed_x = game->p.vec_x / 10.0f;
 	speed_y = game->p.vec_y / 10.0f;
+	float perp_x = -speed_y;
+	float perp_y = speed_x;
+
 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 		mlx_close_window((void *)game->mlx);
-	if (key.key == MLX_KEY_W && key.action != MLX_RELEASE)
-		key_w(game, speed_x, speed_y);
-	if (key.key == MLX_KEY_S && key.action != MLX_RELEASE)
-		key_s(game, speed_x, speed_y);
-	if (key.key == MLX_KEY_D && key.action != MLX_RELEASE)
-		key_d(game, speed_x, speed_y);
-	if (key.key == MLX_KEY_A && key.action != MLX_RELEASE)
-		key_a(game, speed_x, speed_y);
-	if (key.key == MLX_KEY_RIGHT && key.action != MLX_RELEASE)
-		key_right(game);
-	if (key.key == MLX_KEY_LEFT && key.action != MLX_RELEASE)
-		key_left(game);
+	if (key.action != MLX_RELEASE)
+	{
+		if (key.key == MLX_KEY_W)
+			move_player(game, speed_x, speed_y);
+		else if (key.key == MLX_KEY_S)
+			move_player(game, -speed_x, -speed_y);
+		else if (key.key == MLX_KEY_D)
+			move_player(game, perp_x, perp_y);
+		else if (key.key == MLX_KEY_A)
+			move_player(game, -perp_x, -perp_y);
+		else if (key.key == MLX_KEY_RIGHT)
+			key_right(game);
+		else if (key.key == MLX_KEY_LEFT)
+			key_left(game);
+	}
 }
 

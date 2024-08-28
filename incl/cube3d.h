@@ -115,17 +115,34 @@ typedef struct s_ray
 	int			my;
 }	t_ray;
 
+typedef struct s_tex_data
+{
+	float	wall_x;
+	int		tex_x;
+	int		tex_y;
+	float	line_hight;
+	float	step;
+	int		draw_start;
+	int		draw_end;
+	float	tex_pos;
+	int		y;
+	uint32_t color;
+}	t_tex_data;
 
 typedef struct s_g
 {
-	t_p			p;
-	mlx_t		*mlx;
-	int			flag;
-	mlx_image_t	*ceiling;
-	float		plane_x;
-	float		plane_y;
-	int			color_f[3];
-	int			color_c[3];
+	t_p				p;
+	mlx_t			*mlx;
+	int				flag;
+	mlx_image_t		*ceiling;
+	float			plane_x;
+	float			plane_y;
+	int				color_f[3];
+	int				color_c[3];
+	mlx_texture_t	*tex_1;
+	mlx_texture_t	*tex_2;
+	mlx_texture_t	*tex_3;
+	mlx_texture_t	*tex_4;
 }	t_g;
 
 //*** INIT ***//
@@ -157,6 +174,9 @@ void    		key_w(t_g *game, float speed_x, float speed_y);
 void    		key_a(t_g *game, float speed_x, float speed_y);
 void    		key_s(t_g *game, float speed_x, float speed_y);
 void    		key_d(t_g *game, float speed_x, float speed_y);
+void			set_data(t_tex_data *data, int side, t_ray *rays);
+void			put_texture(t_tex_data *data, mlx_texture_t *tex);
+void			draw_rays_aux(t_tex_data *data, t_ray *rays, t_g *game, int side);
 
 //*** PARSE ***//
 

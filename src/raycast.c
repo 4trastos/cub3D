@@ -44,23 +44,12 @@ void    draw_ceiling(mlx_image_t *background, int *color_c, int *color_f)
     }
 }
 
-void	draw_wall(float wall_height, int nr, unsigned int color, t_g *game)
+void	hook(void *param)
 {
-	float		wall_offset;
-	int	y;
+	t_g *game;
 
-	if (wall_height > HEIGHT)
-		wall_height = HEIGHT;
-	wall_offset = (HEIGHT - wall_height) / 2;
-	if (wall_height < 1)
-		wall_height = 1;
-	y = 0;
-	while (y < wall_height)
-	{
-		mlx_put_pixel(game->ceiling, nr, y + wall_offset, color);
-		y++;
-	}
-	mlx_image_to_window(game->mlx, game->ceiling, 0, 0);
+	game = param;
+	rays(game);
 }
 
 void    init_window(t_design *catridge)
@@ -70,6 +59,10 @@ void    init_window(t_design *catridge)
 
 	catridge->height = ft_countlines(catridge->map) * SIZE;
 	catridge->width = get_width(catridge->map) * SIZE;
+	game.tex_1 = mlx_load_png("textures/aux.png");
+	game.tex_2 = mlx_load_png("textures/texture.png");
+	game.tex_3 = mlx_load_png("textures/treko.png");
+	game.tex_4 = mlx_load_png ("textures/elden.png");
     game.mlx = mlx_init(WIDTH, HEIGHT, "The Game", false);
 	game.ceiling = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	draw_ceiling(game.ceiling, catridge->ceiling, catridge->floor);
@@ -93,14 +86,18 @@ void    init_window(t_design *catridge)
 		if (game.p.vec_y < 0){game.plane_x = 0.66; game.plane_y = 0;}
 		else{game.plane_x = -0.66; game.plane_y = 0;}		
 	}
-	//printf("dir X: %f dir Y: %f\n plane X: %f plane Y: %f\n", game.p.vec_x, game.p.vec_y, game.plane_x, game.plane_y);
 	game.p.px = game.p.x + 0.5;
 	game.p.py = game.p.y + 0.5;
 	game.p.map = dupmatrix(catridge->map);
 	game.flag = 0;
 	rays(&game);
 	mlx_key_hook(game.mlx, key_press, (void *)&game);
+	mlx_loop_hook(game.mlx, hook, &game);
     mlx_loop(game.mlx);
+	mlx_delete_texture(game.tex_1);
+	mlx_delete_texture(game.tex_2);
+	mlx_delete_texture(game.tex_3);
+	mlx_delete_texture(game.tex_4);
 	free_map(game.p.map);
 }
 
