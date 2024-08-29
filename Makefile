@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux #-g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux -g3 -fsanitize=address -o3
 
 RM = rm -f
 
@@ -23,6 +23,7 @@ SRC = src/main.c \
 		src/cartridge_2.c \
 		src/raycast.c \
 		src/raycast_2.c \
+		src/raycast_3.c \
 		src/brain.c \
 		src/brain_2.c \
 		src/brain_3.c \
@@ -37,6 +38,7 @@ SRC = src/main.c \
 		utils/ft_atoi.c \
 		utils/ft_split.c \
 		utils/raycast_utils.c \
+		utils/raycast_utils_02.c \
 		utils/get_next_line.c
 
 OBJS = $(SRC:.c=.o)
