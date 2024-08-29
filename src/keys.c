@@ -12,9 +12,10 @@
 
 #include "../incl/cube3d.h"
 
-void move_player(t_g *game, float move_x, float move_y)
+void	move_player(t_g *game, float move_x, float move_y)
 {
-    if (game->p.map[(int)(game->p.py + move_y)][(int)(game->p.px + move_x)] != '1')
+	if (game->p.map[(int)(game->p.py + move_y)][(int)(game->p.px + move_x)]
+		!= '1')
 	{
 		game->p.px += move_x;
 		game->p.py += move_y;
@@ -23,16 +24,13 @@ void move_player(t_g *game, float move_x, float move_y)
 
 void	key_press(mlx_key_data_t key, void *param)
 {
-	t_g	*game;
-	float speed_x;
-	float speed_y;
+	t_g		*game;
+	float	speed_x;
+	float	speed_y;
 
 	game = param;
 	speed_x = game->p.vec_x / 10.0f;
 	speed_y = game->p.vec_y / 10.0f;
-	float perp_x = -speed_y;
-	float perp_y = speed_x;
-
 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 		mlx_close_window((void *)game->mlx);
 	if (key.action != MLX_RELEASE)
@@ -42,13 +40,12 @@ void	key_press(mlx_key_data_t key, void *param)
 		else if (key.key == MLX_KEY_S)
 			move_player(game, -speed_x, -speed_y);
 		else if (key.key == MLX_KEY_D)
-			move_player(game, perp_x, perp_y);
+			move_player(game, -speed_y, speed_x);
 		else if (key.key == MLX_KEY_A)
-			move_player(game, -perp_x, -perp_y);
+			move_player(game, -(-speed_y), -(speed_x));
 		else if (key.key == MLX_KEY_RIGHT)
 			key_right(game);
 		else if (key.key == MLX_KEY_LEFT)
 			key_left(game);
 	}
 }
-

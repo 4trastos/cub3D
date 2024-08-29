@@ -12,36 +12,28 @@
 
 #include "../incl/cube3d.h"
 
-int	get_width(char **map)
+static void	vec_east(t_p *p)
 {
-	int		y;
-	size_t	max;
-
-	max = ft_strlen(map[0]);
-	y = 1;
-	while (y < ft_countlines(map))
-	{
-		if (ft_strlen(map[y]) > max)
-			max = ft_strlen(map[y]);
-		y++;
-	}
-	return ((int)max);
+	p->vec_x = 1.0f;
+	p->vec_y = 0;
 }
 
-void	*ft_memset(void *str, int c, size_t n)
+static void	vec_west(t_p *p)
 {
-	size_t			i;
-	unsigned char	*s;
+	p->vec_x = -1.0f;
+	p->vec_y = 0;
+}
 
-	i = 0;
-	s = str;
-	while (i < n)
-	{
-		s[i] = (unsigned char)c;
-		i++;
-	}
-	s = str;
-	return (str);
+static void	vec_north(t_p *p)
+{
+	p->vec_x = 0;
+	p->vec_y = -1.0f;
+}
+
+static void	vec_south(t_p *p)
+{
+	p->vec_x = 0;
+	p->vec_y = 1.0f;
 }
 
 void	get_player(t_p *p, char **map)
@@ -53,39 +45,22 @@ void	get_player(t_p *p, char **map)
 	while (map[y] != NULL)
 	{
 		x = 0;
-		while (map[y][x] != '\0')
-		{
-			if (map[y][x] == 'N')
-			{
-				p->x = x;
-				p->y = y;
-				p->vec_x = 0;
-				p->vec_y = -1.0f;
-
-			}
-			else if (map[y][x] == 'S')
-			{
-				p->x = x;
-				p->y = y;
-				p->vec_x = 0;
-				p->vec_y = 1.0f;
-			}
-			else if (map[y][x] == 'E')
-			{
-				p->x = x;
-				p->y = y;
-				p->vec_x = 1.0f;
-				p->vec_y = 0;
-			}
-			else if (map[y][x] == 'W')
-			{
-				p->x = x;
-				p->y = y;
-				p->vec_x = -1.0f;
-				p->vec_y = 0;
-			}
+		while (map[y][x] != '\0' && (map[y][x] == '0' || map[y][x] == '1'
+			|| map[y][x] == ' ' || map[y][x] == '\t'))
 			x++;
-		}
+		if (map[y][x] != '\0' && map[y][x] != '0' && map[y][x] != '1'
+			&& map[y][x] != ' ' && map[y][x] != '\t')
+			break ;
 		y++;
 	}
+	if (map[y][x] == 'N')
+		vec_north(p);
+	else if (map[y][x] == 'S')
+		vec_south(p);
+	else if (map[y][x] == 'E')
+		vec_east(p);
+	else if (map[y][x] == 'W')
+		vec_west(p);
+	p->x = x;
+	p->y = y;
 }

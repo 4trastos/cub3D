@@ -37,4 +37,3 @@ int	get_prev(char *str)
 	}
 	return (i);
 }
-

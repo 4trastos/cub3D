@@ -58,7 +58,6 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		error_msg("🚨 You have to upload a file to play! 🚨", NULL);
 	map = arg_check(argc, argv, &cartridge, map);
-	ft_printmap(map);
 	init_window(&cartridge);
 	free_map(map);
 	free_struct(&cartridge);

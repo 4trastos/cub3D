@@ -19,8 +19,8 @@
 # define LEFT +1
 # define UP -1
 # define DOWN +1
-# define WIDTH 720
-# define HEIGHT 480
+# define WIDTH 1920
+# define HEIGHT 1080
 # define PI 3.14159265358979323846
 # define RADIAN 0.017453292519943295
 # define FOV 90
@@ -102,8 +102,8 @@ typedef struct s_p
 typedef struct s_ray
 {
 	float		ra;
-	float		delta_dist_x;
-	float		delta_dist_y;
+	float		d_dist_x;
+	float		d_dist_y;
 	float		ray_dir_x;
 	float		ray_dir_y;
 	float		side_dist_x;
@@ -117,16 +117,16 @@ typedef struct s_ray
 
 typedef struct s_tex_data
 {
-	float	wall_x;
-	int		tex_x;
-	int		tex_y;
-	float	line_hight;
-	float	step;
-	int		draw_start;
-	int		draw_end;
-	float	tex_pos;
-	int		y;
-	uint32_t color;
+	float		wall_x;
+	int			tex_x;
+	int			tex_y;
+	float		lh;
+	float		step;
+	int			d_start;
+	int			d_end;
+	float		t_pos;
+	int			y;
+	uint32_t	color;
 }	t_tex_data;
 
 typedef struct s_g
@@ -163,20 +163,16 @@ void			free_struct(t_design *cartridge);
 void			init_window(t_design *cartridge);
 void			draw_wall(float wall_height, int nr,
 					unsigned int color, t_g *game);
-void    		draw_ceiling(mlx_image_t *background,
-					int *color_c, int *color_f);
-unsigned int 	rgb_to_hex(int r, int g, int b, int a);
-void			rays(t_g *game);
+void			draw_ceiling(mlx_image_t *b, int *c_c, int *c_f);
+unsigned int	r2h(int r, int g, int b, int a);
+void			r(t_g *game);
 void			key_press(mlx_key_data_t key, void *param);
-void    		key_left(t_g *game);
-void    		key_right(t_g *game);
-void    		key_w(t_g *game, float speed_x, float speed_y);
-void    		key_a(t_g *game, float speed_x, float speed_y);
-void    		key_s(t_g *game, float speed_x, float speed_y);
-void    		key_d(t_g *game, float speed_x, float speed_y);
-void			set_data(t_tex_data *data, int side, t_ray *rays);
+void			key_left(t_g *game);
+void			key_right(t_g *game);
+void			set_data(t_tex_data *data, int side, t_ray *r);
 void			put_texture(t_tex_data *data, mlx_texture_t *tex);
-void			draw_rays_aux(t_tex_data *data, t_ray *rays, t_g *game, int side);
+void			draw_r_aux(t_tex_data *data, t_ray *r, t_g *game, int side);
+void			set_cord(t_g *game);
 
 //*** PARSE ***//
 
