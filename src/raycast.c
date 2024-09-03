@@ -59,7 +59,7 @@ void	draw_ceiling(mlx_image_t *b, int *c_c, int *c_f)
 
 void	hook(void *param)
 {
-	t_g	*game;
+	t_g		*game;
 	float	speed_x;
 	float	speed_y;
 
@@ -83,10 +83,10 @@ void	hook(void *param)
 
 void	init_game(t_g *game, t_design *cartidge)
 {
-	game->tex_1 = mlx_load_png("textures/wall1.png");
-	game->tex_2 = mlx_load_png("textures/wall2.png");
-	game->tex_3 = mlx_load_png("textures/wall3.png");
-	game->tex_4 = mlx_load_png("textures/wall4.png");
+	game->tex_1 = mlx_load_png(cartidge->no);
+	game->tex_2 = mlx_load_png(cartidge->so);
+	game->tex_3 = mlx_load_png(cartidge->we);
+	game->tex_4 = mlx_load_png(cartidge->ea);
 	game->color_c[0] = cartidge->ceiling[0];
 	game->color_c[1] = cartidge->ceiling[1];
 	game->color_c[2] = cartidge->ceiling[2];

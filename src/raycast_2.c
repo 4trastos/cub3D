@@ -18,13 +18,13 @@ void	draw_r(int nr, int side, t_ray *r, t_g *game)
 	mlx_texture_t	*tex;
 
 	if (side == 0 && r->ray_dir_x < 0)
-		tex = game->tex_1;
-	else if (side == 0 && r->ray_dir_x > 0)
-		tex = game->tex_2;
-	else if (r->ray_dir_y > 0)
 		tex = game->tex_3;
-	else
+	else if (side == 0 && r->ray_dir_x > 0)
 		tex = game->tex_4;
+	else if (r->ray_dir_y > 0)
+		tex = game->tex_2;
+	else
+		tex = game->tex_1;
 	if (!tex)
 	{
 		printf("Error: No se pudo cargar la textura.\n");
