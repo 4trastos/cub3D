@@ -19,12 +19,13 @@ void	key_right(t_g *game)
 
 	old_vec_x = game->p.vec_x;
 	old_vec_y = game->p.vec_y;
-	game->p.vec_x = old_vec_x * cos(RADIAN)- old_vec_y * sin(RADIAN);
-	game->p.vec_y = old_vec_x * sin(RADIAN)+ old_vec_y * cos(RADIAN);
+	game->p.vec_x = old_vec_x * cos((2 * RADIAN))- old_vec_y * sin(RADIAN);
+	game->p.vec_y = old_vec_x * sin((2 * RADIAN))+ old_vec_y * cos(RADIAN);
 	old_vec_x = game->plane_x;
 	old_vec_y = game->plane_y;
-	game->plane_x = old_vec_x * cos(RADIAN)- old_vec_y * sin(RADIAN);
-	game->plane_y = old_vec_x * sin(RADIAN)+ old_vec_y * cos(RADIAN);
+	game->plane_x = old_vec_x * cos((2 * RADIAN))- old_vec_y * sin(RADIAN);
+	game->plane_y = old_vec_x * sin((2 * RADIAN))+ old_vec_y * cos(RADIAN);
+	game->move_r = false;
 }
 
 void	key_left(t_g *game)
@@ -34,10 +35,11 @@ void	key_left(t_g *game)
 
 	old_vec_x = game->p.vec_x;
 	old_vec_y = game->p.vec_y;
-	game->p.vec_x = old_vec_x * cos(-RADIAN)- old_vec_y * sin(-RADIAN);
-	game->p.vec_y = old_vec_x * sin(-RADIAN)+ old_vec_y * cos(-RADIAN);
+	game->p.vec_x = old_vec_x * cos(-(2 * RADIAN))- old_vec_y * sin(-RADIAN);
+	game->p.vec_y = old_vec_x * sin(-(2 * RADIAN))+ old_vec_y * cos(-RADIAN);
 	old_vec_x = game->plane_x;
 	old_vec_y = game->plane_y;
-	game->plane_x = old_vec_x * cos(-RADIAN)- old_vec_y * sin(-RADIAN);
-	game->plane_y = old_vec_x * sin(-RADIAN)+ old_vec_y * cos(-RADIAN);
+	game->plane_x = old_vec_x * cos(-(2 * RADIAN))- old_vec_y * sin(-RADIAN);
+	game->plane_y = old_vec_x * sin(-(2 * RADIAN))+ old_vec_y * cos(-RADIAN);
+	game->move_l = false;
 }
