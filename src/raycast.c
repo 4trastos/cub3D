@@ -60,17 +60,33 @@ void	draw_ceiling(mlx_image_t *b, int *c_c, int *c_f)
 void	hook(void *param)
 {
 	t_g	*game;
+	float	speed_x;
+	float	speed_y;
 
 	game = param;
 	r(game);
+	speed_x = game->p.vec_x / 10.0f;
+	speed_y = game->p.vec_y / 10.0f;
+	if (game->move_w == true)
+		move_player(game, speed_x, speed_y);
+	else if (game->move_s == true)
+		move_player(game, -speed_x, -speed_y);
+	else if (game->move_d == true)
+		move_player(game, -speed_y, speed_x);
+	else if (game->move_a == true)
+		move_player(game, -(-speed_y), -(speed_x));
+	else if (game->move_r == true)
+		key_right(game);
+	else if (game->move_l == true)
+		key_left(game);
 }
 
 void	init_game(t_g *game, t_design *cartidge)
 {
-	game->tex_1 = mlx_load_png("textures/moss.png");
-	game->tex_2 = mlx_load_png("textures/wall.png");
-	game->tex_3 = mlx_load_png("textures/wood.png");
-	game->tex_4 = mlx_load_png ("textures/wolfestein_wall.png");
+	game->tex_1 = mlx_load_png("textures/wall1.png");
+	game->tex_2 = mlx_load_png("textures/wall2.png");
+	game->tex_3 = mlx_load_png("textures/wall3.png");
+	game->tex_4 = mlx_load_png("textures/wall4.png");
 	game->color_c[0] = cartidge->ceiling[0];
 	game->color_c[1] = cartidge->ceiling[1];
 	game->color_c[2] = cartidge->ceiling[2];
@@ -81,6 +97,12 @@ void	init_game(t_g *game, t_design *cartidge)
 	game->p.px = game->p.x + 0.5;
 	game->p.py = game->p.y + 0.5;
 	game->flag = 0;
+	game->move_w = false;
+	game->move_s = false;
+	game->move_a = false;
+	game->move_d = false;
+	game->move_r = false;
+	game->move_l = false;
 }
 
 void	init_window(t_design *catridge)
