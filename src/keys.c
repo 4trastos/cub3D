@@ -20,10 +20,22 @@ void	move_player(t_g *game, float move_x, float move_y)
 		game->p.px += move_x;
 		game->p.py += move_y;
 	}
-	game->move_w = false;
-	game->move_s = false;
-	game->move_d = false;
-	game->move_a = false;
+}
+
+void	release_key(mlx_key_data_t key, t_g *game)
+{
+	if (key.key == MLX_KEY_W)
+		game->move_w = false;
+	if (key.key == MLX_KEY_S)
+		game->move_s = false;
+	if (key.key == MLX_KEY_D)
+		game->move_d = false;
+	if (key.key == MLX_KEY_A)
+		game->move_a = false;
+	if (key.key == MLX_KEY_RIGHT)
+		game->move_r = false;
+	if (key.key == MLX_KEY_LEFT)
+		game->move_l = false;
 }
 
 void	key_press(mlx_key_data_t key, void *param)
@@ -33,19 +45,21 @@ void	key_press(mlx_key_data_t key, void *param)
 	game = param;
 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 		mlx_close_window((void *)game->mlx);
-	if (key.action != MLX_RELEASE)
+	if (key.action == MLX_PRESS)
 	{
 		if (key.key == MLX_KEY_W)
 			game->move_w = true;
-		else if (key.key == MLX_KEY_S)
+		if (key.key == MLX_KEY_S)
 			game->move_s = true;
-		else if (key.key == MLX_KEY_D)
+		if (key.key == MLX_KEY_D)
 			game->move_d = true;
-		else if (key.key == MLX_KEY_A)
+		if (key.key == MLX_KEY_A)
 			game->move_a = true;
-		else if (key.key == MLX_KEY_RIGHT)
+		if (key.key == MLX_KEY_RIGHT)
 			game->move_r = true;
-		else if (key.key == MLX_KEY_LEFT)
+		if (key.key == MLX_KEY_LEFT)
 			game->move_l = true;
 	}
+	if (key.action == MLX_RELEASE)
+		release_key(key, game);
 }

@@ -65,8 +65,8 @@ void	hook(void *param)
 
 	game = param;
 	r(game);
-	speed_x = game->p.vec_x / 10.0f;
-	speed_y = game->p.vec_y / 10.0f;
+	speed_x = game->p.vec_x / 7.0f;
+	speed_y = game->p.vec_y / 7.0f;
 	if (game->move_w == true)
 		move_player(game, speed_x, speed_y);
 	else if (game->move_s == true)
