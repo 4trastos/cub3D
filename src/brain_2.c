@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/07 14:15:25 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:13:58 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	first_line(t_brain *brain, char **map, int *y, int *x)
 	{
 		if (*x < next && map[*y][*x + 1] == '1')
 			brain->right = true;
+		else if (*x < next && map[*y + 1][*x] == '1')
+			brain->down = true;
 		else if ((*x == next) && map[*y + 1][*x] == '1')
 			brain->down = true;
 	}

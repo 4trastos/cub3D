@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:36:44 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/08 10:14:29 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:14:51 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		error_msg("🚨 You have to upload a file to play! 🚨", NULL);
 	map = arg_check(argc, argv, &cartridge, map);
-	ft_printmap(map);
-	// init_game(map, design);
+	init_window(&cartridge);
 	free_map(map);
 	free_struct(&cartridge);
 	return (0);
