@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:49:49 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/09 13:03:29 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/03 11:54:38 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,16 @@ int	get_prev(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '1')
-			return (i);
+		{
+			if (i == 0)
+			{
+				i = 1;
+				return (i);
+			}
+			else
+				return (i);
+		}
 		i++;
 	}
 	return (i);
 }
-
