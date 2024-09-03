@@ -139,6 +139,12 @@ typedef struct s_g
 	float			plane_y;
 	int				color_f[3];
 	int				color_c[3];
+	bool			move_w;
+	bool			move_a;
+	bool			move_s;
+	bool			move_d;
+	bool			move_l;
+	bool			move_r;
 	mlx_texture_t	*tex_1;
 	mlx_texture_t	*tex_2;
 	mlx_texture_t	*tex_3;
@@ -173,6 +179,7 @@ void			set_data(t_tex_data *data, int side, t_ray *r);
 void			put_texture(t_tex_data *data, mlx_texture_t *tex);
 void			draw_r_aux(t_tex_data *data, t_ray *r, t_g *game, int side);
 void			set_cord(t_g *game);
+void			move_player(t_g *game, float move_x, float move_y);
 
 //*** PARSE ***//
 
