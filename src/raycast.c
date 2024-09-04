@@ -71,13 +71,17 @@ void	hook(void *param)
 		move_player(game, speed_x, speed_y);
 	else if (game->move_s == true)
 		move_player(game, -speed_x, -speed_y);
-	else if (game->move_d == true)
+	else if ((game->move_d == true && (game->p.dir == N || game->p.dir == S))
+		|| (game->move_a && (game->p.dir == E || game->p.dir == W)))
 		move_player(game, -speed_y, speed_x);
-	else if (game->move_a == true)
-		move_player(game, -(-speed_y), -(speed_x));
-	else if (game->move_r == true)
+	else if ((game->move_a == true && (game->p.dir == N || game->p.dir == S))
+		|| (game->move_d && (game->p.dir == E || game->p.dir == W)))
+		move_player(game, speed_y, -speed_x);
+	else if ((game->move_r == true && (game->p.dir == N || game->p.dir == S))
+		|| (game->move_l && (game->p.dir == E || game->p.dir == W)))
 		key_right(game);
-	else if (game->move_l == true)
+	else if ((game->move_l == true && (game->p.dir == N || game->p.dir == S))
+		|| (game->move_r && (game->p.dir == E || game->p.dir == W)))
 		key_left(game);
 }
 
@@ -115,6 +119,7 @@ void	init_window(t_design *catridge)
 	get_player(&player, catridge->map);
 	game.p.x = player.x;
 	game.p.y = player.y;
+	game.p.dir = player.dir;
 	game.p.vec_x = player.vec_x;
 	game.p.vec_y = player.vec_y;
 	init_game(&game, catridge);
@@ -123,7 +128,6 @@ void	init_window(t_design *catridge)
 	draw_ceiling(game.ceiling, catridge->ceiling, catridge->floor);
 	mlx_image_to_window(game.mlx, game.ceiling, 0, 0);
 	game.p.map = dupmatrix(catridge->map);
-	r(&game);
 	mlx_key_hook(game.mlx, key_press, (void *)&game);
 	mlx_loop_hook(game.mlx, hook, &game);
 	mlx_loop(game.mlx);

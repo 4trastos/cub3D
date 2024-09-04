@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicgonza <nicgonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/09 14:31:26 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:47:36 by nicgonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define PI 3.14159265358979323846
-# define RADIAN 0.017453292519943295
+# define RAD 0.017453292519943295
 # define FOV 90
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
@@ -93,6 +93,7 @@ typedef struct s_p
 	int			y;
 	float		px;
 	float		py;
+	char		dir;
 	char		**map;
 	float		vec_y;
 	float		vec_x;
