@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/07 14:09:56 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:31:05 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,15 @@
 # define LEFT +1
 # define UP -1
 # define DOWN +1
+# define WIDTH 1920
+# define HEIGHT 1080
+# define PI 3.14159265358979323846
+# define RAD 0.017453292519943295
+# define FOV 90
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
-// # include "../minilibx-linux/mlx.h"
-// # include "../minilibx-linux/mlx_int.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -53,6 +59,8 @@ typedef struct s_design
 	int				ceiling[3];
 	bool			floor_set;
 	bool			ceiling_set;
+	int				height;
+	int				width;
 	size_t			px;
 	size_t			py;
 }	t_design;
@@ -70,6 +78,8 @@ typedef struct s_brain
 	t_move				*move;
 	int					init_x;
 	int					init_y;
+	int					x;
+	int					y;
 	bool				drowned;
 	bool				right;
 	bool				left;
@@ -78,6 +88,70 @@ typedef struct s_brain
 	unsigned long long	init_coord;
 
 }	t_brain;
+
+typedef struct s_p
+{
+	int			x;
+	int			y;
+	float		px;
+	float		py;
+	char		**map;
+	float		vec_y;
+	float		vec_x;
+	mlx_image_t	*player;
+}	t_p;
+
+typedef struct s_ray
+{
+	float		ra;
+	float		d_dist_x;
+	float		d_dist_y;
+	float		ray_dir_x;
+	float		ray_dir_y;
+	float		side_dist_x;
+	float		side_dist_y;
+	float		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			mx;
+	int			my;
+}	t_ray;
+
+typedef struct s_tex_data
+{
+	float		wall_x;
+	int			tex_x;
+	int			tex_y;
+	float		lh;
+	float		step;
+	int			d_start;
+	int			d_end;
+	float		t_pos;
+	int			y;
+	uint32_t	color;
+}	t_tex_data;
+
+typedef struct s_g
+{
+	t_p				p;
+	mlx_t			*mlx;
+	int				flag;
+	mlx_image_t		*ceiling;
+	float			plane_x;
+	float			plane_y;
+	int				color_f[3];
+	int				color_c[3];
+	bool			move_w;
+	bool			move_a;
+	bool			move_s;
+	bool			move_d;
+	bool			move_l;
+	bool			move_r;
+	mlx_texture_t	*tex_1;
+	mlx_texture_t	*tex_2;
+	mlx_texture_t	*tex_3;
+	mlx_texture_t	*tex_4;
+}	t_g;
 
 //*** INIT ***//
 
@@ -93,6 +167,21 @@ void			create_cartridge(char **data, t_design *cartridge,
 void			free_struct(t_design *cartridge);
 
 //*** GAME ***//
+
+void			init_window(t_design *cartridge);
+void			draw_wall(float wall_height, int nr,
+					unsigned int color, t_g *game);
+void			draw_ceiling(mlx_image_t *b, int *c_c, int *c_f);
+unsigned int	r2h(int r, int g, int b, int a);
+void			r(t_g *game);
+void			key_press(mlx_key_data_t key, void *param);
+void			key_left(t_g *game);
+void			key_right(t_g *game);
+void			set_data(t_tex_data *data, int side, t_ray *r);
+void			put_texture(t_tex_data *data, mlx_texture_t *tex);
+void			draw_r_aux(t_tex_data *data, t_ray *r, t_g *game, int side);
+void			set_cord(t_g *game);
+void			move_player(t_g *game, float move_x, float move_y);
 
 //*** PARSE ***//
 
@@ -111,6 +200,7 @@ char			**dupmatrix(char **str);
 void			upcolour_f(char **number, t_design *cartridge);
 void			upcolour_c(char **number, t_design *cartridge);
 void			skip_space(char *str, int *x);
+int				ft_flood(char **map, t_brain *brain);
 
 //*** UTILS ***//
 
@@ -125,6 +215,9 @@ void			skip_whitespace(char **str);
 int				ft_countlines(char **str);
 int				ft_mtx_len(char **mtx);
 int				get_prev(char *str);
+void			*ft_memset(void *b, int c, size_t len);
+void			get_player(t_p *p, char **map);
+int				get_width(char **map);
 
 //*** ERRORS & FREE ***//
 
@@ -175,5 +268,8 @@ void			first_position(t_brain *brain, char **map, int *y, int *x);
 void			len_equal_next(t_brain *brain, char **map, int *y, int *x);
 void			len_more_next(t_brain *brain, char **map, int *y, int *x);
 void			len_less_next(t_brain *brain, char **map, int *y, int *x);
+void			first_line(t_brain *brain, char **map, int *y, int *x);
+void			last_line(t_brain *brain, char **map, int *y, int *x);
+void			intermediate_lines(t_brain *brain, char **map, int *y, int *x);
 
 #endif
