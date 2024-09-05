@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:17:52 by davgalle          #+#    #+#             */
-/*   Updated: 2024/09/03 12:14:24 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/05 10:40:09 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,28 @@ int	ft_strmapcmp(char *str, char *dst, int len)
 char	*read_file(int fd, char *str)
 {
 	char	*line;
+	int		space;
 
+	space = 0;
 	line = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-		{
-			free(line);
 			break ;
+		if (line[0] == '\n')
+		{
+			space++;
+			if (space == 3)
+			{
+				error_msg("🚨 Wrong map! 🚨", NULL);
+				return (NULL);
+			}
 		}
 		str = ft_strjoin(str, line);
 		free(line);
 	}
+	free(line);
 	return (str);
 }
 
@@ -104,6 +113,7 @@ char	**map_check(int fd, t_design *cartridge, char **map, t_brain *brain)
 		free_map (copy);
 		return (NULL);
 	}
+	ft_printmap(copy);
 	map = dupmatrix(cartridge->map);
 	free_map (copy);
 	return (map);
