@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:17:52 by davgalle          #+#    #+#             */
-/*   Updated: 2024/09/03 12:14:24 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:51:18 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@ int	map_validator(char **map, t_brain *brain)
 		error_msg("🚨 The loaded map contains an invalid player! 🚨", NULL);
 		return (0);
 	}
-	if (walking_the_wall(map, brain) == 0)
+	// if (walking_the_wall(map, brain) == 0)
+	// {
+	// 	error_msg("🚨 The map is not closed by walls! 🚨", NULL);
+	// 	return (0);
+	// }
+	if (ft_flood(map, brain) == 1)
 	{
-		error_msg("🚨 The map is not closed by walls! 🚨", NULL);
+		error_msg("🚨 The loaded map contains invalid characters! 🚨", NULL);
 		return (0);
 	}
 	return (1);
@@ -64,19 +69,28 @@ int	ft_strmapcmp(char *str, char *dst, int len)
 char	*read_file(int fd, char *str)
 {
 	char	*line;
+	int		space;
 
+	space = 0;
 	line = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-		{
-			free(line);
 			break ;
+		if (line[0] == '\n')
+		{
+			space++;
+			if (space == 3)
+			{
+				error_msg("🚨 Wrong map! 🚨", NULL);
+				return (NULL);
+			}
 		}
 		str = ft_strjoin(str, line);
 		free(line);
 	}
+	free(line);
 	return (str);
 }
 

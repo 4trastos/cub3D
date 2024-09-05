@@ -54,6 +54,8 @@ int	get_coordinates(char *str, t_design *cartridge, int flag)
 		cartridge->we = ft_strdup(str);
 	else if (flag == EA)
 		cartridge->ea = ft_strdup(str);
+	if (open(str, O_RDONLY) == -1)
+		return (0);
 	return (1);
 }
 
@@ -92,7 +94,7 @@ void	create_cartridge(char **data, t_design *cartridge, size_t y)
 		if (y <= 3)
 		{
 			if (coordinates(*data, cartridge) == 0)
-				error_msg("🚨 Map error - wrong coordinates! 🚨", 0);
+				error_msg("🚨 Map error - wrong textures! 🚨", 0);
 		}
 		else if (y == 4 || y == 5)
 		{

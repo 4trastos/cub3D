@@ -2,13 +2,13 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux -g3 -o3 #-fsanitize=address
 
 RM = rm -f
 
 LIB = ar rcs
 
-LIBMLX = ./MLX
+LIBMLX = ./MLX42
 
 MLX	= -I ./include -I $(LIBMLX)/include
 
@@ -21,19 +21,26 @@ SRC = src/main.c \
 		src/create_struct.c \
 		src/cartridge.c \
 		src/cartridge_2.c \
+		src/raycast.c \
+		src/raycast_2.c \
+		src/raycast_3.c \
 		src/brain.c \
 		src/brain_2.c \
 		src/brain_3.c \
-		src/raycast.c \
+		src/keys.c \
+		src/floodfill.c \
+		src/keys_utils.c \
 		bits/binary_encoding.c \
 		utils/utils.c \
+		utils/ft_strmapcmp.c \
 		utils/utils_02.c \
 		utils/utils_03.c \
 		utils/ft_itoa.c \
 		utils/ft_atoi.c \
 		utils/ft_split.c \
-		utils/get_next_line.c \
-		utils/raycast_utils.c
+		utils/raycast_utils.c \
+		utils/raycast_utils_02.c \
+		utils/get_next_line.c
 
 OBJS = $(SRC:.c=.o)
 
