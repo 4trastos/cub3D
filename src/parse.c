@@ -46,6 +46,8 @@ int	player_validator(char **map)
 		}
 		y++;
 	}
+	if (flag == 0)
+		return (0);
 	return (1);
 }
 
