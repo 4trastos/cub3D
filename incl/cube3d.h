@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicgonza <nicgonza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 07:37:02 by davgalle          #+#    #+#             */
-/*   Updated: 2024/09/04 11:47:36 by nicgonza         ###   ########.fr       */
+/*   Updated: 2024/09/06 16:55:14 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_brain
 	t_move				*move;
 	int					init_x;
 	int					init_y;
+	int					x;
+	int					y;
 	bool				drowned;
 	bool				right;
 	bool				left;
@@ -93,8 +95,8 @@ typedef struct s_p
 	int			y;
 	float		px;
 	float		py;
-	char		dir;
 	char		**map;
+	char		dir;
 	float		vec_y;
 	float		vec_x;
 	mlx_image_t	*player;
@@ -199,6 +201,7 @@ char			**dupmatrix(char **str);
 void			upcolour_f(char **number, t_design *cartridge);
 void			upcolour_c(char **number, t_design *cartridge);
 void			skip_space(char *str, int *x);
+int				ft_flood(char **map, t_brain *brain);
 
 //*** UTILS ***//
 
@@ -216,6 +219,7 @@ int				get_prev(char *str);
 void			*ft_memset(void *b, int c, size_t len);
 void			get_player(t_p *p, char **map);
 int				get_width(char **map);
+char			**to_bricks(char **paper);
 
 //*** ERRORS & FREE ***//
 
@@ -269,5 +273,8 @@ void			len_less_next(t_brain *brain, char **map, int *y, int *x);
 void			first_line(t_brain *brain, char **map, int *y, int *x);
 void			last_line(t_brain *brain, char **map, int *y, int *x);
 void			intermediate_lines(t_brain *brain, char **map, int *y, int *x);
+int				border_cop(char **map, t_brain *brain);
+void			police(char **map, char to_fill, int x, int y);
+int				validate_map(char **map, t_brain *brain);
 
 #endif

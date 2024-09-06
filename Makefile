@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux -g3 -fsanitize=address -o3
+CFLAGS = -Wall -Werror -Wextra -I/usr/include -Imlx_linux -g3 -o3 -fsanitize=address
 
 RM = rm -f
 
@@ -28,7 +28,9 @@ SRC = src/main.c \
 		src/brain_2.c \
 		src/brain_3.c \
 		src/keys.c \
+		src/floodfill.c \
 		src/keys_utils.c \
+		src/validate_map.c \
 		bits/binary_encoding.c \
 		utils/utils.c \
 		utils/ft_strmapcmp.c \

@@ -1,7 +1,7 @@
-NO ./maps/assets/CONCRETE_2A.xpm
-SO ./maps/assets/VENT_1A.xpm
-WE ./maps/assets/TECH_1A.xpm
-EA ./maps/assets/TECH_3G.xpm
+NO ./textures/wall1.png
+SO ./textures/wall2.png
+WE ./textures/wall3.png
+EA ./textures/wall4.png
 
 F 52,162,35
 C 81,209,246

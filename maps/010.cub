@@ -1,7 +1,7 @@
-NO ./texture/Brick_64x64.xpm
-SO ./texture/Brick_64x64.xpm
-WE ./texture/Brick_64x64.xpm
-EA ./texture/Brick_64x64.xpm
+NO ./textures/wall1.png
+SO ./textures/wall2.png
+WE ./textures/wall3.png
+EA ./textures/wall4.png
 
 F 52,162,35
 C 81,209,246

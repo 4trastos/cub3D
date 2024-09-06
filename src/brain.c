@@ -6,7 +6,7 @@
 /*   By: davgalle <davgalle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 08:30:35 by davgalle          #+#    #+#             */
-/*   Updated: 2024/08/07 14:19:53 by davgalle         ###   ########.fr       */
+/*   Updated: 2024/09/06 11:35:03 by davgalle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	walking_border(t_brain *brain, char **map, int *y, int *x)
 	}
 	else
 		brain->drowned = true;
+	ft_printmap(map);
+	printf("\n");
 }
 
 int	walking_the_wall(char **map, t_brain *brain)
